@@ -10,6 +10,7 @@ Python 3.*
 
 ```
 python tatoeba-query [COMMAND] [from-language] [to-language] [term]
+```
 
 Look for sentences in french containing the french word equivalent to the english word 'water':
 
