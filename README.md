@@ -15,10 +15,10 @@ python tatoeba-query [COMMAND] [from-language] [to-language] [term]
 Look for sentences in french containing the french word equivalent to the english word 'water':
 
 ```
-python tatoeba-query browser eng fra water
+python tatoeba-query b eng fra water
 ```
 
-The only command implemented so far is "browser" to open the browser in a new
+The only command implemented so far is `b` ("b" = "browser") to open the browser in a new
 tab (if possible). 
 
 ## TODO list
