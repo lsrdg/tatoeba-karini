@@ -1,14 +1,17 @@
-import webbrowser
+import webbrowser 
 from sys import argv
 
-script, browser, flang, tlang, term = argv
+script, command, flang, tlang, term = argv
 
 fRef = '&from='
 tRef = '&to='
 
 search = term + fRef + flang + tRef + tlang
 
-if browser == 'browser':
+
+if command == 'b':
     webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
+
 else:
     print ("Ooops!")
+
