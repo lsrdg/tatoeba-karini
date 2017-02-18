@@ -31,8 +31,7 @@ tab (if possible).
 
 ## License
 
-Tatoeba-query is shared under Creative Commons Attribution 2.0, the same as
-[Tatoeba.org](https://tatoeba.org).
+All the creative content is licensed by [Tatoeba.org](https://tatoeba.org)under CC-BY 2.0.
 
 Tatoeba-query is a _personal_ project, which aims to provide a faster way to
 check the amazing resource of Tatoeba.org from the command line. I'm working on
