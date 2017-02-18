@@ -24,9 +24,9 @@ tab (if possible).
 ## TODO list
 
 - [X] Open Tatoeba.org from the command line
-- [ ] Fetch data back to the shell (in instead of opening the browser)
-- [ ] Create a command to list all language's abbreviations used by Tatoeba
 - [ ] Query even if [offline](https://tatoeba.org/eng/downloads)
+- [ ] Create a command to list all language's abbreviations used by Tatoeba
+- [ ] Fetch data back to the shell (in instead of opening the browser)
 - [ ] Create a Vim/Neovim plugin and enjoy it o/
 
 ## License
