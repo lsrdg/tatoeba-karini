@@ -1,4 +1,4 @@
-import webbrowser, argparse, sys, csv
+import webbrowser, argparse, sys, os, csv 
 
 # Set commanline argments
 
@@ -8,6 +8,11 @@ parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
 parser.add_argument("-f", help="Find sentence containing term in a specific language", nargs=2)
 
 args = parser.parse_args()
+
+# --------------------------
+# find and store real path
+
+realPath = os.path.dirname(os.path.realpath(__file__))
 
 # --------------------------
 # Define argument function
@@ -36,7 +41,7 @@ def argF():
     # argF variables
     inLanguage = args.f[0]
     termInArgF = args.f[1]
-    listFile = open('sentences.csv')
+    listFile = open(realPath + '/sentences.csv')
     readList = csv.reader(listFile, delimiter='\t')
 
 
