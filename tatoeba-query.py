@@ -18,10 +18,11 @@ toReference = '&to='
 
 search = term + fromReference + fromLanguage + toReference + toLanguage
 
+def menuInit():
+    if args.b:
+        webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
 
-if args.b:
-    webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
+    else:
+        print ("Ooops!")
 
-else:
-    print ("Ooops!")
-
+menuInit()
