@@ -2,24 +2,32 @@
 
 Open tatoeba.org from the command line.
 
-## Requirements
+## Requirements 
 
-Python 3.*
+Probably Python 3.\*. So far, it has been used only on Linux with Python 3.6.
+
+## Requirements for offline searches
+
+If you want to make use of the `-f` command (to perform offline searches), make
+sure have the file containing the sentences:
+[sentences.csv](http://downloads.tatoeba.org/exports/sentences.tar.bz2).
+
+The file should be: 
+- downloaded (yes, that's right, more than 80MB, about 5511497 lines of pure joy)
+- decompressed (`$ tar -xvfj sentences.csv`)
+- be sure it is placed on the root of the Tatoeba-query directory
 
 ## Usage 
 
 ```
-python tatoeba-query [COMMAND] [from-language] [to-language] [term]
+python tatoeba-query [OPTION] [OPTION'S ARGUMENTS]
 ```
 
-Look for sentences in french containing the french word equivalent to the english word 'water':
+| Optional command | Description | Arguments needed | Syntax | Example |
+|------------------|-------------|------------------|--------|---------|
+| -b               | Open the browser in a new tab performing a search on tatoeba.org | 3 | tatoeba-query -b [FROM-LANGUAGE] [TO-LANGUAGE] | `$ tatoeba-query -b eng jpn breath` |
+| -f               | Find sentences in X language containing the Y-term | 2 | tatoeba-query -f [IN-LANGUAGE] [TERM] | `$ tatoeba-query -f yor water` |
 
-```
-python tatoeba-query b eng fra water
-```
-
-The only command implemented so far is `b` ("b" = "browser") to open the browser in a new
-tab (if possible). 
 
 ## TODO list
 
