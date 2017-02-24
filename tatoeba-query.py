@@ -56,6 +56,13 @@ def argF():
 
     listFile.close()
 
+def argL():
+    searchPattern = args.l[0]
+    abbreviationList = open(realPath + '/abbreviationList.csv') 
+    abbList = csv.reader(abbreviationList, delimiter='\t')
+    for row in abbList:
+        if searchPattern in row:
+            print(row)
 
 # --------------------------
 # Define command line menu function
