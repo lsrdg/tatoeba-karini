@@ -6,6 +6,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
 parser.add_argument("-f", help="Find sentence containing term in a specific language", nargs=2)
+parser.add_argument("-l", help="List languages and their abbreviation used by Tatoeba", nargs=1)
 
 args = parser.parse_args()
 
