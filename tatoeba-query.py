@@ -82,6 +82,9 @@ def menuInit():
     elif args.l:
         argL()
 
+    elif args.s:
+        argS()
+
     else:
         print ("Ooops!")
 
