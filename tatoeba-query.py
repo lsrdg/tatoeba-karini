@@ -6,6 +6,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
 parser.add_argument("-f", help="Find sentence containing term in a specific language", nargs=2)
+parser.add_argument("-l", help="List languages and their abbreviation used by Tatoeba", nargs=1)
 
 args = parser.parse_args()
 
@@ -55,6 +56,13 @@ def argF():
 
     listFile.close()
 
+def argL():
+    searchPattern = args.l[0]
+    abbreviationList = open(realPath + '/abbreviationList.csv') 
+    abbList = csv.reader(abbreviationList, delimiter='\t')
+    for row in abbList:
+        if searchPattern in row:
+            print(row)
 
 # --------------------------
 # Define command line menu function
@@ -66,6 +74,9 @@ def menuInit():
 
     elif args.f:
         argF()
+
+    elif args.l:
+        argL()
 
     else:
         print ("Ooops!")
