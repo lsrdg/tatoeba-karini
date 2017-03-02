@@ -115,9 +115,15 @@ def argF():
 
     # function responsible for making the search AND looping the matches
     def findTermInLang():
-        for row in readList:
-            if row[1] == inLanguageF and termInArgF in row[2]:
-                print(row)
+        foundedTerm = [
+                row 
+                for row in readList
+                if row[1] == inLanguageF and termInArgF in row[2]
+                ]
+
+        for row in foundedTerm:
+            print(row)
+
     
     findTermInLang()
 
