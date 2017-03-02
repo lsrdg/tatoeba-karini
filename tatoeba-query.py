@@ -109,25 +109,23 @@ def argF():
     # argF variables
     inLanguageF = args.f[0]
     termInArgF = args.f[1]
-    listFile = open(realPath + '/sentences.csv')
-    readList = csv.reader(listFile, delimiter='\t')
+    with open(realPath + '/sentences.csv') as listFile:
+        readList = csv.reader(listFile, delimiter='\t')
 
 
-    # function responsible for making the search AND looping the matches
-    def findTermInLang():
-        foundedTerm = [
-                row 
-                for row in readList
-                if row[1] == inLanguageF and termInArgF in row[2]
-                ]
+        # function responsible for making the search AND looping the matches
+        def findTermInLang():
+            foundedTerm = [
+                    row 
+                    for row in readList
+                    if row[1] == inLanguageF and termInArgF in row[2]
+                    ]
 
-        for row in foundedTerm:
-            print(row)
+            for row in foundedTerm:
+                print(row)
 
-    
-    findTermInLang()
-
-    listFile.close()
+        
+        findTermInLang()
 
 def argL():
     searchPattern = args.l[0]
