@@ -5,10 +5,15 @@ import webbrowser, argparse, sys, os, csv
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
-parser.add_argument("-f", help="Find sentence containing term in a specific language", nargs=2)
-parser.add_argument("-l", help="List languages and their abbreviation used by Tatoeba", nargs=1)
+parser.add_argument("-f", help="Find sentence containing term in a specific \
+        language", nargs=2)
+parser.add_argument("-l", help="List languages and their abbreviation used by \
+        Tatoeba", nargs=1)
 parser.add_argument("-s", help="Search for sentences containing term in a \
-        specific language and it the counterparts of the sentence in another language", nargs=3)
+        specific language and it the counterparts of the sentence in another \
+        language", nargs=3)
+parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
+        sentence's ID", nargs=1)
 
 args = parser.parse_args()
 
