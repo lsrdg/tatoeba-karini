@@ -1,6 +1,6 @@
 # Tatoeba-query
 
-Consulting and interacting with tatoeba.org from the command line.
+Consult tatoeba.org from the command line.
 
 WARNING: this project is **extremely experimental**. (:
 
@@ -28,12 +28,13 @@ The files should be:
 python tatoeba-query [OPTION] [OPTION'S ARGUMENTS]
 ```
 
-| Optional command | Description | Arguments needed | Syntax | Example |
+| Optional command | Description | Required arguments | Syntax | Example |
 |------------------|-------------|------------------|--------|---------|
 | -b               | Open the browser in a new tab performing a search on tatoeba.org | 3 | -b [FROM-LANGUAGE] [TO-LANGUAGE] | `$ tatoeba-query -b eng jpn breath` |
 | -f               | Find sentences in X language containing the Y-term | 2 | -f [IN-LANGUAGE] [TERM] | `$ tatoeba-query -f yor water` |
 | -l               | List languages and their abbreviation used by Tatoeba | 1 | -l [LANGUAGE-NAME] | `$ tatoeba-query -l Japanese` |
 | -s               | Search for sentences containing term in a specific language and it the counterparts of the sentence in another language | 3 | -s [IN-LANGUAGE] [TO-LANGUAGE] [TERM] | `$ tatoeba-query -s eng jpn air` |
+| -i               | Open Tatoeba on the browser searching by sentence's ID | 1 | -i [SENTENCE'S-ID] | `$ tatoeba-query -i 825762` |
 
 
 ## TODO list
@@ -41,6 +42,7 @@ python tatoeba-query [OPTION] [OPTION'S ARGUMENTS]
 - [x] Open Tatoeba.org from the command line
 - [x] Query even if [offline](https://tatoeba.org/eng/downloads)
 - [x] Create a command to list all language's abbreviations used by Tatoeba
+- [x] Search Tatoeba.org by sentence's ID
 - [ ] Fetch data back to the shell (in instead of opening the browser)
 - [ ] Create a Vim/Neovim plugin and enjoy it o/
 - [ ] Download and uncompress files as needed
