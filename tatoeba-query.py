@@ -120,11 +120,11 @@ def argF():
 
 def argL():
     searchPattern = args.l[0]
-    abbreviationList = open(realPath + '/abbreviationList.csv') 
-    abbList = csv.reader(abbreviationList, delimiter='\t')
-    for row in abbList:
-        if searchPattern in row:
-            print(row)
+    with open(realPath + '/abbreviationList.csv') as abbreviationList:
+        abbList = csv.reader(abbreviationList, delimiter='\t')
+        for row in abbList:
+            if searchPattern in row:
+                print(row)
 
 def argS():
     findTermTranslatedtoLang()
