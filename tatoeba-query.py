@@ -106,6 +106,15 @@ def argB():
     # Open the browser
     webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
 
+def argI():
+    """
+    Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
+    Use it to get more information about the sentence.
+    """
+    sentenceID = args.i[0]
+    webbrowser.open('https://tatoeba.org/eng/sentences/show/' + sentenceID, new=2)
+
+
 def argF():
 
     # Make use of the 'sentences.csv' file to to find a sentence containing 
@@ -158,6 +167,9 @@ def menuInit():
 
     elif args.s:
         argS()
+
+    elif args.i:
+        argI()
 
     else:
         print ("Ooops!")
