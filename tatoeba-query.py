@@ -12,9 +12,6 @@ parser.add_argument("-s", help="Search for sentences containing term in a \
 
 args = parser.parse_args()
 
-inLanguage = args.s[0]
-toLanguage = args.s[1]
-termInArgS = args.s[2]
 # --------------------------
 # find and store real path
 
@@ -33,6 +30,7 @@ def findTranslation(register):
     global translationsList
     global testUhuList
     global testCheckID
+
     with open(realPath + '/links.csv') as links:
         linksList = csv.reader(links, delimiter='\t')
 
@@ -45,14 +43,18 @@ def findTranslation(register):
                 pass
 
 def checkTranslation(possibleID):
-    global testCheckID
     global sentences
     global translationsList
+
+    inLanguageS = args.s[0]
+    toLanguageS = args.s[1]
+    termInArgS = args.s[2]
+
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         for row in sentencesList:
-            if row[0] == possibleID and toLanguage == row[1]:
-                uhuList.append(row)
+            if row[0] == possibleID and toLanguageS == row[1]:
+                translationsList.append(row)
                 print(sentences[-1])
                 print(translationsList[-1], '\n\n')
                 continue
@@ -64,19 +66,22 @@ def findTermTranslatedtoLang():
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         global sentences
         global baseID
-        global testID
         global translationsList
         global baseRow
             
+        inLanguageS = args.s[0]
+        toLanguageS = args.s[1]
+        termInArgS = args.s[2]
+
         for row in sentencesList:
-            if row[1] == inLanguage and termInArgS in row[2]:
+            if row[1] == inLanguageS and termInArgS in row[2]:
                 baseID = row[0]
                 baseRow = row
                 sentences.append(baseRow)
                 findTranslation(baseID)
 
 
-            elif row[1] != inLanguage or termInArgS not in row[2]:
+            elif row[1] != inLanguageS or termInArgS not in row[2]:
                 pass
 # Define argument function
 
@@ -102,7 +107,7 @@ def argF():
     # a term in an language
     
     # argF variables
-    inLanguage = args.f[0]
+    inLanguageF = args.f[0]
     termInArgF = args.f[1]
     listFile = open(realPath + '/sentences.csv')
     readList = csv.reader(listFile, delimiter='\t')
@@ -111,7 +116,7 @@ def argF():
     # function responsible for making the search AND looping the matches
     def findTermInLang():
         for row in readList:
-            if row[1] == inLanguage and termInArgF in row[2]:
+            if row[1] == inLanguageF and termInArgF in row[2]:
                 print(row)
     
     findTermInLang()
@@ -122,9 +127,8 @@ def argL():
     searchPattern = args.l[0]
     with open(realPath + '/abbreviationList.csv') as abbreviationList:
         abbList = csv.reader(abbreviationList, delimiter='\t')
-        for row in abbList:
-            if searchPattern in row:
-                print(row)
+        abbreviation = [row for row in abbList if searchPattern in row]
+        print(abbreviation)
 
 def argS():
     findTermTranslatedtoLang()
