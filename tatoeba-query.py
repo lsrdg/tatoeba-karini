@@ -70,9 +70,7 @@ def findTermTranslatedtoLang():
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         global sentences
-        global baseID
         global translationsList
-        global baseRow
             
         inLanguageS = args.s[0]
         toLanguageS = args.s[1]
@@ -80,10 +78,8 @@ def findTermTranslatedtoLang():
 
         for row in sentencesList:
             if row[1] == inLanguageS and termInArgS in row[2]:
-                baseID = row[0]
-                baseRow = row
-                sentences.append(baseRow)
-                findTranslation(baseID)
+                sentences.append(row)
+                findTranslation(row[0])
 
 
             elif row[1] != inLanguageS or termInArgS not in row[2]:
