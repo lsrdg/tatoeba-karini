@@ -33,6 +33,9 @@ python tatoeba-query [OPTION] [OPTION'S ARGUMENTS]
 | -b               | Open the browser in a new tab performing a search on tatoeba.org | 3 | -b [FROM-LANGUAGE] [TO-LANGUAGE] | `$ tatoeba-query -b eng jpn breath` |
 | -f               | Find sentences in X language containing the Y-term | 2 | -f [IN-LANGUAGE] [TERM] | `$ tatoeba-query -f yor water` |
 | -l               | List languages and their abbreviation used by Tatoeba | 1 | -l [LANGUAGE-NAME] | `$ tatoeba-query -l Japanese` |
+| -r               | Request from Tatoeba.org. Works in the same way as the main
+search on the website | 3 | -r [FROM-LANGUAGE] [TO-LANGUAGE] [TERM] | `$
+tatoeba-karini -r eng ara watermelon` |
 | -s               | Search for sentences containing term in a specific language and it the counterparts of the sentence in another language | 3 | -s [IN-LANGUAGE] [TO-LANGUAGE] [TERM] | `$ tatoeba-query -s eng jpn air` |
 | -i               | Open Tatoeba on the browser searching by sentence's ID | 1 | -i [SENTENCE'S-ID] | `$ tatoeba-query -i 825762` |
 
