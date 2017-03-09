@@ -46,7 +46,7 @@ tatoeba-karini -r eng ara watermelon` |
 - [x] Query even if [offline](https://tatoeba.org/eng/downloads)
 - [x] Create a command to list all language's abbreviations used by Tatoeba
 - [x] Search Tatoeba.org by sentence's ID
-- [ ] Fetch data back to the shell (in instead of opening the browser)
+- [x] Fetch data back to the shell (in instead of opening the browser)
 - [ ] Create a Vim/Neovim plugin and enjoy it o/
 - [ ] Download and uncompress files as needed
 - [ ] Improve performance, clean the code of everything
