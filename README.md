@@ -1,4 +1,4 @@
-# Tatoeba-query
+# Tatoeba-karini
 
 Consult tatoeba.org from the command line.
 
@@ -20,24 +20,24 @@ The command `-s` makes use of the `sentences.csv` *and*:
 The files should be: 
 - downloaded (yes, that's right, more than 80MB, about 5511497 lines of pure joy)
 - decompressed (`$ tar -xvfj sentences.csv`)
-- be sure it is placed on the root of the Tatoeba-query directory
+- be sure it is placed on the root of the Tatoeba-karini directory
 
 ## Usage 
 
 ```
-python tatoeba-query [OPTION] [OPTION'S ARGUMENTS]
+python tatoeba-karini [OPTION] [OPTION'S ARGUMENTS]
 ```
 
 | Optional command | Description | Required arguments | Syntax | Example |
 |------------------|-------------|------------------|--------|---------|
-| -b               | Open the browser in a new tab performing a search on tatoeba.org | 3 | -b [FROM-LANGUAGE] [TO-LANGUAGE] | `$ tatoeba-query -b eng jpn breath` |
-| -f               | Find sentences in X language containing the Y-term | 2 | -f [IN-LANGUAGE] [TERM] | `$ tatoeba-query -f yor water` |
-| -l               | List languages and their abbreviation used by Tatoeba | 1 | -l [LANGUAGE-NAME] | `$ tatoeba-query -l Japanese` |
+| -b               | Open the browser in a new tab performing a search on tatoeba.org | 3 | -b [FROM-LANGUAGE] [TO-LANGUAGE] | `$ tatoeba-karini -b eng jpn breath` |
+| -f               | Find sentences in X language containing the Y-term | 2 | -f [IN-LANGUAGE] [TERM] | `$ tatoeba-karini -f yor water` |
+| -l               | List languages and their abbreviation used by Tatoeba | 1 | -l [LANGUAGE-NAME] | `$ tatoeba-karini -l Japanese` |
 | -r               | Request from Tatoeba.org. Works in the same way as the main
 search on the website | 3 | -r [FROM-LANGUAGE] [TO-LANGUAGE] [TERM] | `$
 tatoeba-karini -r eng ara watermelon` |
-| -s               | Search for sentences containing term in a specific language and it the counterparts of the sentence in another language | 3 | -s [IN-LANGUAGE] [TO-LANGUAGE] [TERM] | `$ tatoeba-query -s eng jpn air` |
-| -i               | Open Tatoeba on the browser searching by sentence's ID | 1 | -i [SENTENCE'S-ID] | `$ tatoeba-query -i 825762` |
+| -s               | Search for sentences containing term in a specific language and it the counterparts of the sentence in another language | 3 | -s [IN-LANGUAGE] [TO-LANGUAGE] [TERM] | `$ tatoeba-karini -s eng jpn air` |
+| -i               | Open Tatoeba on the browser searching by sentence's ID | 1 | -i [SENTENCE'S-ID] | `$ tatoeba-karini -i 825762` |
 
 
 ## TODO list
@@ -55,14 +55,14 @@ tatoeba-karini -r eng ara watermelon` |
 
 All the creative content is licensed by [Tatoeba.org](https://tatoeba.org)under CC-BY 2.0.
 
-Tatoeba-query is a _personal_ project, which aims to provide a faster way to
+Tatoeba-karini is a _personal_ project, which aims to provide a faster way to
 check the amazing resource of Tatoeba.org from the command line. I'm working on
 it **as** and **while** learning to program independently. By no means it should
 be used for something serious.
 
 ## Issues, bugs, contributions
 
-If you have any problem while using Tatoeba-query, **please**:
+If you have any problem while using Tatoeba-karini, **please**:
 
 - do **not** bother the Tatoeba's team. They are already doing an amazing work
   out there. (:
