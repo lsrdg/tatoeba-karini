@@ -1,4 +1,4 @@
-import webbrowser, argparse, sys, os, csv 
+import webbrowser, argparse, sys, os, csv, requests, bs4, lxml
 
 # Set commanline argments
 
@@ -7,15 +7,19 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
 parser.add_argument("-f", help="Find sentence containing term in a specific \
         language", nargs=2)
+parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
+        sentence's ID", nargs=1)
 parser.add_argument("-l", help="List languages and their abbreviation used by \
         Tatoeba", nargs=1)
+parser.add_argument("-r", help="Request data from Tatoeba.org, works as the \
+        main search on the homepage", nargs=3)
 parser.add_argument("-s", help="Search for sentences containing term in a \
         specific language and it the counterparts of the sentence in another \
         language", nargs=3)
-parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
-        sentence's ID", nargs=1)
 
 args = parser.parse_args()
+
+
 
 # --------------------------
 # find and store real path
@@ -23,7 +27,7 @@ args = parser.parse_args()
 realPath = os.path.dirname(os.path.realpath(__file__))
 
 # --------------------------
-# Functions for the main search
+# Functions for the main LOCAL search
 
 # The main search stuff
 
@@ -58,8 +62,8 @@ def checkTranslation(possibleID):
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         for row in sentencesList:
-            if row[0] == possibleID and toLanguageS == row[1]:
-                translationsList.append(row)
+            if row[0] == possibleID and toLanguageS == row[1]: 
+                translationsList.append(row) 
                 print(sentences[-1])
                 print(translationsList[-1], '\n\n')
                 continue
@@ -144,6 +148,31 @@ def argL():
         abbreviation = [row for row in abbList if searchPattern in row]
         print(abbreviation)
 
+# Fetching
+def argR():
+
+    fromLanguage = args.r[0]
+    toLanguage = args.r[1]
+    term = args.r[2]
+    fromReference = 'from='
+    toReference = '&to='
+    query = '&query='
+
+    # Join everything to perform the search
+    search = fromReference + fromLanguage + toReference + toLanguage + query + term 
+    res = requests.get('https://tatoeba.org/eng/sentences/search?', search)
+    res.raise_for_status()
+
+    ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
+
+    sSoup = ttbksoup.find_all('div', class_='sentence')
+    tSoup = ttbksoup.find_all('div', class_='translation')
+
+    for s,t in zip(sSoup, tSoup):
+        print(s.find('div', class_='text').getText())
+        print(t.find('div', class_='text').getText(), '\n')
+
+
 def argS():
     findTermTranslatedtoLang()
 
@@ -152,7 +181,10 @@ def argS():
 
 def menuInit():
 
-    if args.b:
+    if args.r:
+        argR()
+
+    elif args.b:
         argB()
 
     elif args.f:
