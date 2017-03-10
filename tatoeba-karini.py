@@ -164,14 +164,9 @@ def argR():
     res.raise_for_status()
 
     ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
-
-    sSoup = ttbksoup.find_all('div', class_='sentence')
-    tSoup = ttbksoup.find_all('div', class_='translation')
-
-    for s,t in zip(sSoup, tSoup):
-        print(s.find('div', class_='text').getText())
-        print(t.find('div', class_='text').getText(), '\n')
-
+    elements = ttbksoup.find_all('div', class_='sentence translations'.split())
+    print("\n".join("{}".format(el.find('div', class_='text').get_text()) for \
+            el in elements))
 
 def argS():
     findTermTranslatedtoLang()
