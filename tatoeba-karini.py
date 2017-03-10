@@ -1,10 +1,12 @@
-import webbrowser, argparse, sys, os, csv, requests, bs4, lxml
+import webbrowser, argparse, sys, os, csv, requests, bs4, lxml, tarfile
 
 # Set commanline argments
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
+parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
+        perform offline searchs", nargs=1)
 parser.add_argument("-f", help="Find sentence containing term in a specific \
         language", nargs=2)
 parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
@@ -106,6 +108,46 @@ def argB():
     # Open the browser
     webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
 
+def argD():
+    downloadFile = args.d[0]
+    def downloadTool():
+        with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
+            print('Downloading the ', downloadFile, 'file, in the \'.tar.bz2\' format.')
+            print('Please wait.')
+            res = requests.get('http://downloads.tatoeba.org/exports/' + downloadFile + '.tar.bz2')
+            res.raise_for_status()
+            if not res.ok:
+                print('Download failed.')
+                pass
+
+            for block in res.iter_content(1024):
+                theFile.write(block)
+
+            print('Download finished.\n\n')
+
+    def uncompressTool():
+        print('\n\nUncompressing the ', downloadFile, 'file. Please wait.')
+        untarFile = tarfile.open(realPath + downloadFile + '.tar.bz2', 'r:bz2')
+        untarFile.extractall(realPath)
+        untarFile.close()
+        print('File uncompressed and ready to use.\n')
+
+    print("\nYou will be downloading this file directly from https://tatoeba.org/eng/downloads.")
+    print('Keep in mind that this file is released under CC-BY.')
+    print('But if you would like more information about the file, check the link above.')
+    print('You should also keep in mind that this file can be around 100mb.')
+    print('\nThe file will be downloaded and uncompressed.')
+    print('\n\nWould you like to proceed?')
+    
+    askForDownload = input('> ')
+
+    if askForDownload.lower() == 'yes':
+        downloadTool()
+        uncompressTool()
+    else:
+        print('\n\nNo problems. You can always download and extract the files manually.')
+        print('Just head to https://tatoeba.org/eng/downloads.\n')
+
 def argI():
     """
     Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
@@ -181,6 +223,9 @@ def menuInit():
 
     elif args.b:
         argB()
+
+    elif args.d:
+        argD()
 
     elif args.f:
         argF()
