@@ -208,7 +208,7 @@ def argR():
     ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
     elements = ttbksoup.find_all('div', class_='sentence translations'.split())
     print("\n".join("{}".format(el.find('div', class_='text').get_text()) for \
-            el in elements))
+            el in elements), '\n')
 
 def argS():
     findTermTranslatedtoLang()
@@ -218,26 +218,27 @@ def argS():
 
 def menuInit():
 
-    if args.r:
-        argR()
-
-    elif args.b:
+    if args.b:
         argB()
-
-    elif args.d:
-        argD()
 
     elif args.f:
         argF()
 
+    elif args.d:
+        argD()
+
+    elif args.i:
+        argI()
+
     elif args.l:
         argL()
+
+    elif args.r:
+        argR()
 
     elif args.s:
         argS()
 
-    elif args.i:
-        argI()
 
     else:
         print ("Ooops!")
