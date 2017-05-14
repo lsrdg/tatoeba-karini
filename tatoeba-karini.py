@@ -5,16 +5,22 @@ import webbrowser, argparse, sys, os, csv, requests, bs4, lxml, tarfile
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
+
 parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
         perform offline searchs", nargs=1)
+
 parser.add_argument("-f", help="Find sentence containing term in a specific \
         language", nargs=2)
+
 parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
         sentence's ID", nargs=1)
+
 parser.add_argument("-l", help="List languages and their abbreviation used by \
         Tatoeba", nargs=1)
+
 parser.add_argument("-r", help="Request data from Tatoeba.org, works as the \
         main search on the homepage", nargs=3)
+
 parser.add_argument("-s", help="Search for sentences containing term in a \
         specific language and it the counterparts of the sentence in another \
         language", nargs=3)
@@ -137,11 +143,11 @@ def argD():
     print('But if you would like more information about the file, check the link above.')
     print('You should also keep in mind that this file can be around 100mb.')
     print('\nThe file will be downloaded and uncompressed.')
-    print('\n\nWould you like to proceed?')
+    print('\n\nWould you like to proceed? (y/n)')
     
     askForDownload = input('> ')
 
-    if askForDownload.lower() == 'yes':
+    if askForDownload.lower() == 'yes' or askForDownload.lower() == 'y':
         downloadTool()
         uncompressTool()
     else:
@@ -209,6 +215,27 @@ def argR():
     elements = ttbksoup.find_all('div', class_='sentence translations'.split())
     print("\n".join("{}".format(el.find('div', class_='text').get_text()) for \
             el in elements), '\n')
+
+    try:
+        pagination = ttbksoup.find('md-icon', class_='next')
+        pagination = pagination.find('a', href=True)
+        nextPage = input("Next page? (y/n) ")
+        if nextPage == "y":
+            pageURL = pagination['href']
+            resNext = requests.get('https://tatoeba.org', pageURL)
+            res.raise_for_status()
+
+            ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
+            elements = ttbksoup.find_all('div', class_='sentence translations'.split())
+            print("\n".join("{}".format(el.find('div', class_='text').get_text()) for \
+                    el in elements), '\n')
+        else:
+            pass
+
+
+    except:
+        pass
+        
 
 def argS():
     findTermTranslatedtoLang()
