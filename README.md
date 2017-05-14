@@ -46,14 +46,15 @@ The files should be:
 python tatoeba-karini [OPTION] [OPTION'S ARGUMENTS]
 ```
 
-| Optional command | Description | Required arguments | Syntax | Example |
-|------------------|-------------|------------------|--------|---------|
-| -b               | Open the browser in a new tab performing a search on tatoeba.org | 3 | -b [FROM-LANGUAGE] [TO-LANGUAGE] | `$ tatoeba-karini -b eng jpn breath` |
-| -f               | Find sentences in X language containing the Y-term | 2 | -f [IN-LANGUAGE] [TERM] | `$ tatoeba-karini -f yor water` |
-| -l               | List languages and their abbreviation used by Tatoeba | 1 | -l [LANGUAGE-NAME] | `$ tatoeba-karini -l Japanese` |
-| -r               | Request from Tatoeba.org. Works in the same way as the main search on the website | 3 | -r [FROM-LANGUAGE] [TO-LANGUAGE] [TERM] | `$ tatoeba-karini -r eng ara watermelon` |
-| -s               | Search for sentences containing term in a specific language and it the counterparts of the sentence in another language | 3 | -s [IN-LANGUAGE] [TO-LANGUAGE] [TERM] | `$ tatoeba-karini -s eng jpn air` |
-| -i               | Open Tatoeba on the browser searching by sentence's ID | 1 | -i [SENTENCE'S-ID] | `$ tatoeba-karini -i 825762` |
+| Optional command | Description                                                                                                             | Required arguments | Syntax                                  | Example                                  |
+|------------------|-------------------------------------------------------------------------------------------------------------------------|--------------------|-----------------------------------------|------------------------------------------|
+| -b               | Open the browser in a new tab performing a search on tatoeba.org                                                        | 3                  | -b [FROM-LANGUAGE] [TO-LANGUAGE]        | `$ tatoeba-karini -b eng jpn breath`     |
+| -f               | Find sentences in X language containing the Y-term                                                                      | 2                  | -f [IN-LANGUAGE] [TERM]                 | `$ tatoeba-karini -f yor water`          |
+| -l               | List languages and their abbreviation used by Tatoeba                                                                   | 1                  | -l [LANGUAGE-NAME]                      | `$ tatoeba-karini -l Japanese`           |
+| -r               | Request from Tatoeba.org. Works in the same way as the main search on the website                                       | 3                  | -r [FROM-LANGUAGE] [TO-LANGUAGE] [TERM] | `$ tatoeba-karini -r eng ara watermelon` |
+| -s               | Search for sentences containing term in a specific language and it the counterparts of the sentence in another language | 3                  | -s [IN-LANGUAGE] [TO-LANGUAGE] [TERM]   | `$ tatoeba-karini -s eng jpn air`        |
+| -i               | Open Tatoeba on the browser searching by sentence's ID                                                                  | 1                  | -i [SENTENCE'S-ID]                      | `$ tatoeba-karini -i 825762`             |
+| -d               | Download files (`links` or `sentences`) from Tatoeba.org in order to perform offline searchs                            | 1                  | -d [FILE]                               | `$ tatoeba-karini -d links`              |
 
 
 ## TODO list
@@ -64,7 +65,7 @@ python tatoeba-karini [OPTION] [OPTION'S ARGUMENTS]
 - [x] Search Tatoeba.org by sentence's ID
 - [x] Fetch data back to the shell (in instead of opening the browser)
 - [ ] Create a Vim/Neovim plugin and enjoy it o/
-- [ ] Download and uncompress files as needed
+- [x] Download and uncompress files as needed
 - [ ] Improve performance, clean the code of everything
 
 ### Notes
