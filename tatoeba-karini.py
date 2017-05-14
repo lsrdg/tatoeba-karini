@@ -132,7 +132,7 @@ def argD():
             print('Download finished.\n\n')
 
     def uncompressTool():
-        print('\n\nUncompressing the ', downloadFile, 'file. Please wait.')
+        print('\n\nUncompressing the', downloadFile, 'file. Please wait.')
         untarFile = tarfile.open(realPath + downloadFile + '.tar.bz2', 'r:bz2')
         untarFile.extractall(realPath)
         untarFile.close()
