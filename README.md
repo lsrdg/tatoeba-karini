@@ -20,7 +20,21 @@ _from [Wikipedia](https://en.wikipedia.org/wiki/Tatoeba)_
 
 If you work on the command line and deal with language stuff, you probably make
 use of some editor, dictionary, translator, thesaurus etc. The only thing 
-missing was access to the great material available on Tatoeba, not any more.
+I was missing was access to the great material available on Tatoeba, not any more.
+
+And in order to learn Python and programming, I needed a project that I do care 
+about.
+
+## Current stage
+
+Tatoeba-karini is currently on its `0.0.*` version. The `0.1` version will come
+when:
+
+- the offline searching gets rewritten and improved (regex and performance)
+- the html parser is able to paginate the results
+- there is a proper, complete and built-in documentation
+
+Untill then, the project remains unstable and experimental. 
 
 ## Requirements 
 
@@ -72,14 +86,14 @@ python tatoeba-karini [OPTION] [OPTION'S ARGUMENTS]
 
 About the commands and their current state:
 
-- 2 two commands for **opening** Tatoeba.org from the command line (`-b`,
+- There are two commands for **opening** Tatoeba.org from the command line (`-b`,
   `-i`), and they _should_ just work. There are also other commands that should
   get their own 'open in the browser' version.
 
 - All the offline commands need improvement. `-f` is working pretty well for my
-  personal use, but still need some REGEX to work as it should. `-s` is worst of
-  all of them, taking several minutes to perform even the most basic search. The
-  uneficiency of these commands reflect how much I need to learn, any help
+  personal use, but still need some REGEX to work as it should. `-s` is the worst 
+  of all of them, taking several minutes to perform even the most basic search.
+  The uneficiency of these commands reflect how much I need to learn, any help
   welcome. (:
 
 - The fetching/scrapping command `-r` is not perfect, but it is what I had in
@@ -109,6 +123,6 @@ If you have any problem while using Tatoeba-karini, **please**:
 
 - do **not** bother the Tatoeba's team. They are already doing an amazing work
   out there. (:
-- And create issue here. Any feedback is a good feedback. (:
+- And create an issue here. Any feedback is a good feedback. (:
 - being the only user, I have no idea how it behaves over there, let me know if
   you don't mind.
