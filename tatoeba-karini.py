@@ -138,6 +138,14 @@ def argD():
         untarFile.close()
         print('File uncompressed and ready to use.\n')
 
+    
+    if args.d[0] == 'sentences' or args.d[0] == 'links':
+        pass
+    elif args.d[0] != 'sentences' or args.d[0] != 'links':
+        print("Wrong file name. Please, choose between 'sentences' and 'links'.")
+        print("Consult the README file to learn more about their usage.")
+        return
+
     print("\nYou will be downloading this file directly from https://tatoeba.org/eng/downloads.")
     print('Keep in mind that this file is released under CC-BY.')
     print('But if you would like more information about the file, check the link above.')
@@ -150,6 +158,8 @@ def argD():
     if askForDownload.lower() == 'yes' or askForDownload.lower() == 'y':
         downloadTool()
         uncompressTool()
+
+
     else:
         print('\n\nNo problems. You can always download and extract the files manually.')
         print('Just head to https://tatoeba.org/eng/downloads.\n')
