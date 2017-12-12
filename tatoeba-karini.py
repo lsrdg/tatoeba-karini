@@ -136,13 +136,12 @@ def argD():
         print('\n\nNo problems. You can always download and extract the files manually.')
         print('Just head to https://tatoeba.org/eng/downloads.\n')
 
-def argI():
+def argI(sentenceId):
     """
     Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
     Use it to get more information about the sentence.
     """
-    sentenceID = args.i[0]
-    webbrowser.open('https://tatoeba.org/eng/sentences/show/' + sentenceID, new=2)
+    webbrowser.open('https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2)
 
 
 def argF():
