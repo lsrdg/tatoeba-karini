@@ -253,7 +253,7 @@ def argS():
 # --------------------------
 # Define command line menu function
 
-def menuInit():
+def main():
 
     if args.b:
         argB()
@@ -280,7 +280,9 @@ def menuInit():
     else:
         print ("Ooops!")
 
-#---------------------------
-# call the menu
 
-menuInit()
+# ---------------------------
+# call the main
+
+if __name__ == '__main__':
+    main()
