@@ -295,7 +295,8 @@ def main():
         argI()
 
     elif args.l:
-        argL()
+        searchPattern = args.l[0]
+        argL(searchPattern)
 
     elif args.r:
         argR()
