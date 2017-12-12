@@ -1,33 +1,5 @@
 import webbrowser, argparse, sys, os, csv, requests, bs4, lxml, tarfile
 
-# Set commanline argments
-
-parser = argparse.ArgumentParser()
-
-parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
-
-parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
-        perform offline searchs", nargs=1)
-
-parser.add_argument("-f", help="Find sentence containing term in a specific \
-        language", nargs=2)
-
-parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
-        sentence's ID", nargs=1)
-
-parser.add_argument("-l", help="List languages and their abbreviation used by \
-        Tatoeba", nargs=1)
-
-parser.add_argument("-r", help="Request data from Tatoeba.org, works as the \
-        main search on the homepage", nargs=3)
-
-parser.add_argument("-s", help="Search for sentences containing term in a \
-        specific language and it the counterparts of the sentence in another \
-        language", nargs=3)
-
-args = parser.parse_args()
-
-
 
 # --------------------------
 # find and store real path
