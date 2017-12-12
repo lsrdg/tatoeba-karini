@@ -263,7 +263,8 @@ def main():
         argD()
 
     elif args.i:
-        argI()
+        sentenceId = args.i[0]
+        argI(sentenceId)
 
     elif args.l:
         searchPattern = args.l[0]
