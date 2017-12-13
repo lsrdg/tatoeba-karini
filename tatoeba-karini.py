@@ -13,6 +13,8 @@ realPath = os.path.dirname(os.path.realpath(__file__))
 
 sentences = []
 translationsList = []
+
+
 def findTranslation(register):
     global translationID
     global toLanguage
