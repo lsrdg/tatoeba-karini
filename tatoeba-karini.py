@@ -83,8 +83,7 @@ def argB(fromLanguage, toLanguage, term):
     # Open the browser
     webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
 
-def argD():
-    downloadFile = args.d[0]
+def argD(downloadFile):
     def downloadTool():
         with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
             print('Downloading the ', downloadFile, 'file, in the \'.tar.bz2\' format.')
