@@ -253,7 +253,10 @@ def main():
     args = parser.parse_args()
 
     if args.b:
-        argB()
+        fromLanguage = args.b[0]
+        toLanguage = args.b[1]
+        term = args.b[2]
+        argB(fromLanguage, toLanguage, term)
 
     elif args.f:
         argF()
