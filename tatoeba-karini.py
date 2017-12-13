@@ -70,13 +70,10 @@ def findTermTranslatedtoLang():
                 pass
 # Define argument function
 
-def argB():
+def argB(fromLanguage, toLanguage, term):
     # Open tatoeba.org in a new tab browser performing a search
     
     # ArgB variables
-    fromLanguage = args.b[0]
-    toLanguage = args.b[1]
-    term = args.b[2]
     fromReference = '&from='
     toReference = '&to='
 
