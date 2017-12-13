@@ -259,7 +259,8 @@ def main():
         argF()
 
     elif args.d:
-        argD()
+        downloadFile = args.d[0]
+        argD(downloadFile)
 
     elif args.i:
         sentenceId = args.i[0]
