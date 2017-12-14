@@ -140,14 +140,12 @@ def argI(sentenceId):
     webbrowser.open('https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2)
 
 
-def argF():
+def argF(inLanguageF, termInArgF):
 
     # Make use of the 'sentences.csv' file to to find a sentence containing 
     # a term in an language
     
     # argF variables
-    inLanguageF = args.f[0]
-    termInArgF = args.f[1]
     with open(realPath + '/sentences.csv') as listFile:
         readList = csv.reader(listFile, delimiter='\t')
 
@@ -255,7 +253,9 @@ def main():
         argB(fromLanguage, toLanguage, term)
 
     elif args.f:
-        argF()
+        inLanguageF = args.f[0]
+        termInArgF = args.f[1]
+        argF(inLanguageF,termInArgF)
 
     elif args.d:
         downloadFile = args.d[0]
