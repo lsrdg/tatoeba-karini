@@ -171,11 +171,8 @@ def argL(searchPattern):
         print(abbreviation)
 
 # Fetching
-def argR():
+def argR(fromLanguage, toLanguage, term):
 
-    fromLanguage = args.r[0]
-    toLanguage = args.r[1]
-    term = args.r[2]
     fromReference = 'from='
     toReference = '&to='
     query = '&query='
@@ -270,7 +267,10 @@ def main():
         argL(searchPattern)
 
     elif args.r:
-        argR()
+        fromLanguage = args.r[0]
+        toLanguage = args.r[1]
+        term = args.r[2]
+        argR(fromLanguage, toLanguage, term)
 
     elif args.s:
         argS()
