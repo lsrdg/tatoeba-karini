@@ -13,7 +13,7 @@ realPath = os.path.dirname(os.path.realpath(__file__))
 
 sentences = []
 translationsList = []
-def findTranslation(register):
+def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
     global translationID
     global toLanguage
     global translationsList
@@ -26,18 +26,15 @@ def findTranslation(register):
         for line in linksList: 
             if line[0] == register:
                 testCheckID = line[1]
-                checkTranslation(testCheckID)
+                checkTranslation(testCheckID, inLanguageS, toLanguageS, termInArgS)
                 continue
             else:
                 pass
 
-def checkTranslation(possibleID):
+def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
     global sentences
     global translationsList
 
-    inLanguageS = args.s[0]
-    toLanguageS = args.s[1]
-    termInArgS = args.s[2]
 
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
@@ -50,20 +47,16 @@ def checkTranslation(possibleID):
             else:
                 pass
 
-def findTermTranslatedtoLang():
+def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         global sentences
         global translationsList
             
-        inLanguageS = args.s[0]
-        toLanguageS = args.s[1]
-        termInArgS = args.s[2]
-
         for row in sentencesList:
             if row[1] == inLanguageS and termInArgS in row[2]:
                 sentences.append(row)
-                findTranslation(row[0])
+                findTranslation(row[0], inLanguageS, toLanguageS, termInArgS)
 
 
             elif row[1] != inLanguageS or termInArgS not in row[2]:
@@ -208,8 +201,8 @@ def argR(fromLanguage, toLanguage, term):
         pass
         
 
-def argS():
-    findTermTranslatedtoLang()
+def argS(inLanguageS, toLanguageS, termInArgS):
+    findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS)
 
 # --------------------------
 # Define command line menu function
@@ -273,8 +266,10 @@ def main():
         argR(fromLanguage, toLanguage, term)
 
     elif args.s:
-        argS()
-
+        inLanguageS = args.s[0]
+        toLanguageS = args.s[1]
+        termInArgS = args.s[2]
+        argS(inLanguageS, toLanguageS, termInArgS)
 
     else:
         print ("Ooops!")
