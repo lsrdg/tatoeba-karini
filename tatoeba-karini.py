@@ -32,7 +32,7 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
     with open(realPath + '/links.csv') as links:
         linksList = csv.reader(links, delimiter='\t')
 
-        for line in linksList: 
+        for line in linksList:
             if line[0] == register:
                 testCheckID = line[1]
                 checkTranslation(testCheckID, inLanguageS, toLanguageS, termInArgS)
@@ -48,8 +48,8 @@ def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         for row in sentencesList:
-            if row[0] == possibleID and toLanguageS == row[1]: 
-                translationsList.append(row) 
+            if row[0] == possibleID and toLanguageS == row[1]:
+                translationsList.append(row)
                 print(sentences[-1])
                 print(translationsList[-1], '\n\n')
                 continue
@@ -108,7 +108,6 @@ def argD(downloadFile):
         untarFile.close()
         print('File uncompressed and ready to use.\n')
 
-    
     if args.d[0] == 'sentences' or args.d[0] == 'links':
         pass
     elif args.d[0] != 'sentences' or args.d[0] != 'links':
@@ -144,7 +143,7 @@ def argI(sentenceId):
 
 def argF(inLanguageF, termInArgF):
 
-    # Make use of the 'sentences.csv' file to to find a sentence containing 
+    # Make use of the 'sentences.csv' file to to find a sentence containing
     # a term in an language
     
     # argF variables
@@ -155,7 +154,7 @@ def argF(inLanguageF, termInArgF):
         # function responsible for making the search AND looping the matches
         def findTermInLang():
             foundedTerm = [
-                    row 
+                    row
                     for row in readList
                     if row[1] == inLanguageF and termInArgF in row[2]
                     ]
@@ -180,7 +179,7 @@ def argR(fromLanguage, toLanguage, term):
     query = '&query='
 
     # Join everything to perform the search
-    search = fromReference + fromLanguage + toReference + toLanguage + query + term 
+    search = fromReference + fromLanguage + toReference + toLanguage + query + term
     res = requests.get('https://tatoeba.org/eng/sentences/search?', search)
     res.raise_for_status()
 
