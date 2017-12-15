@@ -4,7 +4,6 @@ import os
 import csv
 import requests
 import bs4
-import lxml
 import tarfile
 
 
