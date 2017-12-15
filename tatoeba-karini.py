@@ -1,4 +1,11 @@
-import webbrowser, argparse, sys, os, csv, requests, bs4, lxml, tarfile
+import webbrowser
+import argparse
+import os
+import csv
+import requests
+import bs4
+import lxml
+import tarfile
 
 
 # --------------------------
