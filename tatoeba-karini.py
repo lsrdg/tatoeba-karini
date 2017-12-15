@@ -1,33 +1,5 @@
 import webbrowser, argparse, sys, os, csv, requests, bs4, lxml, tarfile
 
-# Set commanline argments
-
-parser = argparse.ArgumentParser()
-
-parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
-
-parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
-        perform offline searchs", nargs=1)
-
-parser.add_argument("-f", help="Find sentence containing term in a specific \
-        language", nargs=2)
-
-parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
-        sentence's ID", nargs=1)
-
-parser.add_argument("-l", help="List languages and their abbreviation used by \
-        Tatoeba", nargs=1)
-
-parser.add_argument("-r", help="Request data from Tatoeba.org, works as the \
-        main search on the homepage", nargs=3)
-
-parser.add_argument("-s", help="Search for sentences containing term in a \
-        specific language and it the counterparts of the sentence in another \
-        language", nargs=3)
-
-args = parser.parse_args()
-
-
 
 # --------------------------
 # find and store real path
@@ -41,7 +13,7 @@ realPath = os.path.dirname(os.path.realpath(__file__))
 
 sentences = []
 translationsList = []
-def findTranslation(register):
+def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
     global translationID
     global toLanguage
     global translationsList
@@ -54,18 +26,15 @@ def findTranslation(register):
         for line in linksList: 
             if line[0] == register:
                 testCheckID = line[1]
-                checkTranslation(testCheckID)
+                checkTranslation(testCheckID, inLanguageS, toLanguageS, termInArgS)
                 continue
             else:
                 pass
 
-def checkTranslation(possibleID):
+def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
     global sentences
     global translationsList
 
-    inLanguageS = args.s[0]
-    toLanguageS = args.s[1]
-    termInArgS = args.s[2]
 
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
@@ -78,33 +47,26 @@ def checkTranslation(possibleID):
             else:
                 pass
 
-def findTermTranslatedtoLang():
+def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         global sentences
         global translationsList
             
-        inLanguageS = args.s[0]
-        toLanguageS = args.s[1]
-        termInArgS = args.s[2]
-
         for row in sentencesList:
             if row[1] == inLanguageS and termInArgS in row[2]:
                 sentences.append(row)
-                findTranslation(row[0])
+                findTranslation(row[0], inLanguageS, toLanguageS, termInArgS)
 
 
             elif row[1] != inLanguageS or termInArgS not in row[2]:
                 pass
 # Define argument function
 
-def argB():
+def argB(fromLanguage, toLanguage, term):
     # Open tatoeba.org in a new tab browser performing a search
     
     # ArgB variables
-    fromLanguage = args.b[0]
-    toLanguage = args.b[1]
-    term = args.b[2]
     fromReference = '&from='
     toReference = '&to='
 
@@ -114,8 +76,7 @@ def argB():
     # Open the browser
     webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
 
-def argD():
-    downloadFile = args.d[0]
+def argD(downloadFile):
     def downloadTool():
         with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
             print('Downloading the ', downloadFile, 'file, in the \'.tar.bz2\' format.')
@@ -164,23 +125,20 @@ def argD():
         print('\n\nNo problems. You can always download and extract the files manually.')
         print('Just head to https://tatoeba.org/eng/downloads.\n')
 
-def argI():
+def argI(sentenceId):
     """
     Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
     Use it to get more information about the sentence.
     """
-    sentenceID = args.i[0]
-    webbrowser.open('https://tatoeba.org/eng/sentences/show/' + sentenceID, new=2)
+    webbrowser.open('https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2)
 
 
-def argF():
+def argF(inLanguageF, termInArgF):
 
     # Make use of the 'sentences.csv' file to to find a sentence containing 
     # a term in an language
     
     # argF variables
-    inLanguageF = args.f[0]
-    termInArgF = args.f[1]
     with open(realPath + '/sentences.csv') as listFile:
         readList = csv.reader(listFile, delimiter='\t')
 
@@ -199,19 +157,15 @@ def argF():
         
         findTermInLang()
 
-def argL():
-    searchPattern = args.l[0]
+def argL(searchPattern):
     with open(realPath + '/abbreviationList.csv') as abbreviationList:
         abbList = csv.reader(abbreviationList, delimiter='\t')
         abbreviation = [row for row in abbList if searchPattern in row]
         print(abbreviation)
 
 # Fetching
-def argR():
+def argR(fromLanguage, toLanguage, term):
 
-    fromLanguage = args.r[0]
-    toLanguage = args.r[1]
-    term = args.r[2]
     fromReference = 'from='
     toReference = '&to='
     query = '&query='
@@ -247,40 +201,82 @@ def argR():
         pass
         
 
-def argS():
-    findTermTranslatedtoLang()
+def argS(inLanguageS, toLanguageS, termInArgS):
+    findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS)
 
 # --------------------------
 # Define command line menu function
 
-def menuInit():
+def main():
+
+    # Set commanline argments
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
+
+    parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
+            perform offline searchs", nargs=1)
+
+    parser.add_argument("-f", help="Find sentence containing term in a specific \
+            language", nargs=2)
+
+    parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
+            sentence's ID", nargs=1)
+
+    parser.add_argument("-l", help="List languages and their abbreviation used by \
+            Tatoeba", nargs=1)
+
+    parser.add_argument("-r", help="Request data from Tatoeba.org, works as the \
+            main search on the homepage", nargs=3)
+
+    parser.add_argument("-s", help="Search for sentences containing term in a \
+            specific language and it the counterparts of the sentence in another \
+            language", nargs=3)
+
+    args = parser.parse_args()
 
     if args.b:
-        argB()
+        fromLanguage = args.b[0]
+        toLanguage = args.b[1]
+        term = args.b[2]
+        argB(fromLanguage, toLanguage, term)
 
     elif args.f:
-        argF()
+        inLanguageF = args.f[0]
+        termInArgF = args.f[1]
+        argF(inLanguageF,termInArgF)
 
     elif args.d:
-        argD()
+        downloadFile = args.d[0]
+        argD(downloadFile)
 
     elif args.i:
-        argI()
+        sentenceId = args.i[0]
+        argI(sentenceId)
 
     elif args.l:
-        argL()
+        searchPattern = args.l[0]
+        argL(searchPattern)
 
     elif args.r:
-        argR()
+        fromLanguage = args.r[0]
+        toLanguage = args.r[1]
+        term = args.r[2]
+        argR(fromLanguage, toLanguage, term)
 
     elif args.s:
-        argS()
-
+        inLanguageS = args.s[0]
+        toLanguageS = args.s[1]
+        termInArgS = args.s[2]
+        argS(inLanguageS, toLanguageS, termInArgS)
 
     else:
         print ("Ooops!")
 
-#---------------------------
-# call the menu
 
-menuInit()
+# ---------------------------
+# call the main
+
+if __name__ == '__main__':
+    main()
