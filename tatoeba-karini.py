@@ -40,6 +40,7 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
             else:
                 pass
 
+
 def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
     global sentences
     global translationsList
@@ -55,6 +56,7 @@ def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
                 continue
             else:
                 pass
+
 
 def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
     with open(realPath + '/sentences.csv') as sentencesListing:
@@ -72,6 +74,7 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
                 pass
 # Define argument function
 
+
 def argB(fromLanguage, toLanguage, term):
     # Open tatoeba.org in a new tab browser performing a search
     
@@ -84,6 +87,7 @@ def argB(fromLanguage, toLanguage, term):
     
     # Open the browser
     webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
+
 
 def argD(downloadFile):
     def downloadTool():
@@ -133,6 +137,7 @@ def argD(downloadFile):
         print('\n\nNo problems. You can always download and extract the files manually.')
         print('Just head to https://tatoeba.org/eng/downloads.\n')
 
+
 def argI(sentenceId):
     """
     Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
@@ -165,11 +170,13 @@ def argF(inLanguageF, termInArgF):
         
         findTermInLang()
 
+
 def argL(searchPattern):
     with open(realPath + '/abbreviationList.csv') as abbreviationList:
         abbList = csv.reader(abbreviationList, delimiter='\t')
         abbreviation = [row for row in abbList if searchPattern in row]
         print(abbreviation)
+
 
 # Fetching
 def argR(fromLanguage, toLanguage, term):
@@ -214,6 +221,7 @@ def argS(inLanguageS, toLanguageS, termInArgS):
 
 # --------------------------
 # Define command line menu function
+
 
 def main():
 
