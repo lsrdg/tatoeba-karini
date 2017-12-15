@@ -45,7 +45,6 @@ def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
     global sentences
     global translationsList
 
-
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         for row in sentencesList:
@@ -68,7 +67,6 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
             if row[1] == inLanguageS and termInArgS in row[2]:
                 sentences.append(row)
                 findTranslation(row[0], inLanguageS, toLanguageS, termInArgS)
-
 
             elif row[1] != inLanguageS or termInArgS not in row[2]:
                 pass
@@ -132,7 +130,6 @@ def argD(downloadFile):
         downloadTool()
         uncompressTool()
 
-
     else:
         print('\n\nNo problems. You can always download and extract the files manually.')
         print('Just head to https://tatoeba.org/eng/downloads.\n')
@@ -155,7 +152,6 @@ def argF(inLanguageF, termInArgF):
     with open(realPath + '/sentences.csv') as listFile:
         readList = csv.reader(listFile, delimiter='\t')
 
-
         # function responsible for making the search AND looping the matches
         def findTermInLang():
             foundedTerm = [
@@ -167,7 +163,6 @@ def argF(inLanguageF, termInArgF):
             for row in foundedTerm:
                 print(row)
 
-        
         findTermInLang()
 
 
@@ -210,7 +205,6 @@ def argR(fromLanguage, toLanguage, term):
                     el in elements), '\n')
         else:
             pass
-
 
     except:
         pass
