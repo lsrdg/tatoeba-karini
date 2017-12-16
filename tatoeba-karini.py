@@ -115,9 +115,9 @@ def argD(downloadFile):
         untarFile.close()
         print('File uncompressed and ready to use.\n')
 
-    if args.d[0] == 'sentences' or args.d[0] == 'links':
+    if downloadFile == 'sentences' or downloadFile == 'links':
         pass
-    elif args.d[0] != 'sentences' or args.d[0] != 'links':
+    elif downloadFile != 'sentences' or downloadFile != 'links':
         print(
             "Wrong file name. Please, choose between 'sentences' and 'links'.")
         print("Consult the README file to learn more about their usage.")
