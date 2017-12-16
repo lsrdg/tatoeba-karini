@@ -35,7 +35,8 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
         for line in linksList:
             if line[0] == register:
                 testCheckID = line[1]
-                checkTranslation(testCheckID, inLanguageS, toLanguageS, termInArgS)
+                checkTranslation(
+                    testCheckID, inLanguageS, toLanguageS, termInArgS)
                 continue
             else:
                 pass
@@ -62,7 +63,7 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         global sentences
         global translationsList
-            
+
         for row in sentencesList:
             if row[1] == inLanguageS and termInArgS in row[2]:
                 sentences.append(row)
@@ -75,24 +76,28 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
 
 def argB(fromLanguage, toLanguage, term):
     # Open tatoeba.org in a new tab browser performing a search
-    
+
     # ArgB variables
     fromReference = '&from='
     toReference = '&to='
 
     # Join everything to perform the search
     search = term + fromReference + fromLanguage + toReference + toLanguage
-    
+
     # Open the browser
-    webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
+    webbrowser.open(
+        'https://tatoeba.org/eng/sentences/search?query=' + search, new=2
+    )
 
 
 def argD(downloadFile):
     def downloadTool():
         with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
-            print('Downloading the ', downloadFile, 'file, in the \'.tar.bz2\' format.')
+            print('Downloading the ',
+                  downloadFile, 'file, in the \'.tar.bz2\' format.')
             print('Please wait.')
-            res = requests.get('http://downloads.tatoeba.org/exports/' + downloadFile + '.tar.bz2')
+            res = requests.get('http://downloads.tatoeba.org/exports/' +
+                               downloadFile + '.tar.bz2')
             res.raise_for_status()
             if not res.ok:
                 print('Download failed.')
@@ -113,17 +118,24 @@ def argD(downloadFile):
     if args.d[0] == 'sentences' or args.d[0] == 'links':
         pass
     elif args.d[0] != 'sentences' or args.d[0] != 'links':
-        print("Wrong file name. Please, choose between 'sentences' and 'links'.")
+        print(
+            "Wrong file name. Please, choose between 'sentences' and 'links'.")
         print("Consult the README file to learn more about their usage.")
         return
 
-    print("\nYou will be downloading this file directly from https://tatoeba.org/eng/downloads.")
+    print("""
+            \nYou will be downloading this file directly
+            from https://tatoeba.org/eng/downloads.
+          """)
     print('Keep in mind that this file is released under CC-BY.')
-    print('But if you would like more information about the file, check the link above.')
+    print("""
+            But if you would like more information about the file,
+            check the link above.
+          """)
     print('You should also keep in mind that this file can be around 100mb.')
     print('\nThe file will be downloaded and uncompressed.')
     print('\n\nWould you like to proceed? (y/n)')
-    
+
     askForDownload = input('> ')
 
     if askForDownload.lower() == 'yes' or askForDownload.lower() == 'y':
@@ -131,7 +143,10 @@ def argD(downloadFile):
         uncompressTool()
 
     else:
-        print('\n\nNo problems. You can always download and extract the files manually.')
+        print(""" \n\n
+                No problems. You can always download and
+                extract the files manually.
+              """)
         print('Just head to https://tatoeba.org/eng/downloads.\n')
 
 
@@ -140,14 +155,15 @@ def argI(sentenceId):
     Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
     Use it to get more information about the sentence.
     """
-    webbrowser.open('https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2)
+    webbrowser.open(
+        'https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2)
 
 
 def argF(inLanguageF, termInArgF):
 
     # Make use of the 'sentences.csv' file to to find a sentence containing
     # a term in an language
-    
+
     # argF variables
     with open(realPath + '/sentences.csv') as listFile:
         readList = csv.reader(listFile, delimiter='\t')
@@ -181,7 +197,8 @@ def argR(fromLanguage, toLanguage, term):
     query = '&query='
 
     # Join everything to perform the search
-    search = fromReference + fromLanguage + toReference + toLanguage + query + term
+    search = fromReference + \
+        fromLanguage + toReference + toLanguage + query + term
     res = requests.get('https://tatoeba.org/eng/sentences/search?', search)
     res.raise_for_status()
 
@@ -200,15 +217,17 @@ def argR(fromLanguage, toLanguage, term):
             res.raise_for_status()
 
             ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
-            elements = ttbksoup.find_all('div', class_='sentence translations'.split())
-            print("\n".join("{}".format(el.find('div', class_='text').get_text()) for \
-                    el in elements), '\n')
+            elements = ttbksoup.find_all(
+                    'div', class_='sentence translations'.split())
+            print("\n".join("{}".format(el.find(
+                'div', class_='text').get_text()) for el in elements), '\n')
+
         else:
             pass
 
     except:
         pass
-        
+
 
 def argS(inLanguageS, toLanguageS, termInArgS):
     findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS)
