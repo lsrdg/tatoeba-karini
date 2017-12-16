@@ -242,7 +242,8 @@ def main():
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
+    parser.add_argument(
+        "-b", help="Open a browser and show the result", nargs=3)
 
     parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
             perform offline searchs", nargs=1)
@@ -260,8 +261,8 @@ def main():
             main search on the homepage", nargs=3)
 
     parser.add_argument("-s", help="Search for sentences containing term in a \
-            specific language and it the counterparts of the sentence in another \
-            language", nargs=3)
+            specific language and it the counterparts of the sentence in \
+            another language", nargs=3)
 
     args = parser.parse_args()
 
