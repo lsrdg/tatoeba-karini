@@ -126,12 +126,12 @@ def argD(downloadFile):
     print("""
             \nYou will be downloading this file directly
             from https://tatoeba.org/eng/downloads.
-          """)
+            """)
     print('Keep in mind that this file is released under CC-BY.')
     print("""
             But if you would like more information about the file,
             check the link above.
-          """)
+            """)
     print('You should also keep in mind that this file can be around 100mb.')
     print('\nThe file will be downloaded and uncompressed.')
     print('\n\nWould you like to proceed? (y/n)')
@@ -143,8 +143,8 @@ def argD(downloadFile):
         uncompressTool()
 
     else:
-        print(""" \n\n
-                No problems. You can always download and
+        print("""
+                \n\nNo problems. You can always download and
                 extract the files manually.
               """)
         print('Just head to https://tatoeba.org/eng/downloads.\n')
@@ -156,7 +156,8 @@ def argI(sentenceId):
     Use it to get more information about the sentence.
     """
     webbrowser.open(
-        'https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2)
+        'https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2
+    )
 
 
 def argF(inLanguageF, termInArgF):
@@ -173,7 +174,8 @@ def argF(inLanguageF, termInArgF):
             foundedTerm = [
                 row
                 for row in readList
-                if row[1] == inLanguageF and termInArgF in row[2]]
+                if row[1] == inLanguageF and termInArgF in row[2]
+            ]
 
             for row in foundedTerm:
                 print(row)
@@ -196,8 +198,8 @@ def argR(fromLanguage, toLanguage, term):
     query = '&query='
 
     # Join everything to perform the search
-    search = fromReference + \
-        fromLanguage + toReference + toLanguage + query + term
+    search = fromReference + fromLanguage +\
+        toReference + toLanguage + query + term
     res = requests.get('https://tatoeba.org/eng/sentences/search?', search)
     res.raise_for_status()
 
@@ -218,9 +220,9 @@ def argR(fromLanguage, toLanguage, term):
             ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
             elements = ttbksoup.find_all(
                 'div', class_='sentence translations'.split())
-            print("\n".join("{}".format(el.find(
-                'div', class_='text').get_text()) for el in elements), '\n')
-
+            print("\n".join("{}".format(
+                el.find('div', class_='text').get_text())
+                for el in elements), '\n')
         else:
             pass
 
@@ -242,7 +244,8 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        "-b", help="Open a browser and show the result", nargs=3)
+        "-b", help="Open a browser and show the result", nargs=3
+    )
 
     parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
             perform offline searchs", nargs=1)
@@ -260,8 +263,9 @@ def main():
             main search on the homepage", nargs=3)
 
     parser.add_argument("-s", help="Search for sentences containing term in a \
-            specific language and it the counterparts of the sentence in \
-            another language", nargs=3)
+            specific language and it the counterparts of the sentence \
+            in another \
+            language", nargs=3)
 
     args = parser.parse_args()
 
