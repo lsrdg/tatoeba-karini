@@ -1,4 +1,10 @@
-import webbrowser, argparse, sys, os, csv, requests, bs4, lxml, tarfile
+import webbrowser
+import argparse
+import os
+import csv
+import requests
+import bs4
+import tarfile
 
 
 # --------------------------
@@ -26,65 +32,72 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
     with open(realPath + '/links.csv') as links:
         linksList = csv.reader(links, delimiter='\t')
 
-        for line in linksList: 
+        for line in linksList:
             if line[0] == register:
                 testCheckID = line[1]
-                checkTranslation(testCheckID, inLanguageS, toLanguageS, termInArgS)
+                checkTranslation(
+                    testCheckID, inLanguageS, toLanguageS, termInArgS)
                 continue
             else:
                 pass
+
 
 def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
     global sentences
     global translationsList
 
-
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         for row in sentencesList:
-            if row[0] == possibleID and toLanguageS == row[1]: 
-                translationsList.append(row) 
+            if row[0] == possibleID and toLanguageS == row[1]:
+                translationsList.append(row)
                 print(sentences[-1])
                 print(translationsList[-1], '\n\n')
                 continue
             else:
                 pass
 
+
 def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         global sentences
         global translationsList
-            
+
         for row in sentencesList:
             if row[1] == inLanguageS and termInArgS in row[2]:
                 sentences.append(row)
                 findTranslation(row[0], inLanguageS, toLanguageS, termInArgS)
 
-
             elif row[1] != inLanguageS or termInArgS not in row[2]:
                 pass
 # Define argument function
 
+
 def argB(fromLanguage, toLanguage, term):
     # Open tatoeba.org in a new tab browser performing a search
-    
+
     # ArgB variables
     fromReference = '&from='
     toReference = '&to='
 
     # Join everything to perform the search
     search = term + fromReference + fromLanguage + toReference + toLanguage
-    
+
     # Open the browser
-    webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
+    webbrowser.open(
+        'https://tatoeba.org/eng/sentences/search?query=' + search, new=2
+    )
+
 
 def argD(downloadFile):
     def downloadTool():
         with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
-            print('Downloading the ', downloadFile, 'file, in the \'.tar.bz2\' format.')
+            print('Downloading the ',
+                  downloadFile, 'file, in the \'.tar.bz2\' format.')
             print('Please wait.')
-            res = requests.get('http://downloads.tatoeba.org/exports/' + downloadFile + '.tar.bz2')
+            res = requests.get('http://downloads.tatoeba.org/exports/' +
+                               downloadFile + '.tar.bz2')
             res.raise_for_status()
             if not res.ok:
                 print('Download failed.')
@@ -102,69 +115,80 @@ def argD(downloadFile):
         untarFile.close()
         print('File uncompressed and ready to use.\n')
 
-    
     if args.d[0] == 'sentences' or args.d[0] == 'links':
         pass
     elif args.d[0] != 'sentences' or args.d[0] != 'links':
-        print("Wrong file name. Please, choose between 'sentences' and 'links'.")
+        print(
+            "Wrong file name. Please, choose between 'sentences' and 'links'.")
         print("Consult the README file to learn more about their usage.")
         return
 
-    print("\nYou will be downloading this file directly from https://tatoeba.org/eng/downloads.")
+    print("""
+            \nYou will be downloading this file directly
+            from https://tatoeba.org/eng/downloads.
+            """)
     print('Keep in mind that this file is released under CC-BY.')
-    print('But if you would like more information about the file, check the link above.')
+    print("""
+            But if you would like more information about the file,
+            check the link above.
+            """)
     print('You should also keep in mind that this file can be around 100mb.')
     print('\nThe file will be downloaded and uncompressed.')
     print('\n\nWould you like to proceed? (y/n)')
-    
+
     askForDownload = input('> ')
 
     if askForDownload.lower() == 'yes' or askForDownload.lower() == 'y':
         downloadTool()
         uncompressTool()
 
-
     else:
-        print('\n\nNo problems. You can always download and extract the files manually.')
+        print("""
+                \n\nNo problems. You can always download and
+                extract the files manually.
+              """)
         print('Just head to https://tatoeba.org/eng/downloads.\n')
+
 
 def argI(sentenceId):
     """
     Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
     Use it to get more information about the sentence.
     """
-    webbrowser.open('https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2)
+    webbrowser.open(
+        'https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2
+    )
 
 
 def argF(inLanguageF, termInArgF):
 
-    # Make use of the 'sentences.csv' file to to find a sentence containing 
+    # Make use of the 'sentences.csv' file to to find a sentence containing
     # a term in an language
-    
+
     # argF variables
     with open(realPath + '/sentences.csv') as listFile:
         readList = csv.reader(listFile, delimiter='\t')
 
-
         # function responsible for making the search AND looping the matches
         def findTermInLang():
             foundedTerm = [
-                    row 
-                    for row in readList
-                    if row[1] == inLanguageF and termInArgF in row[2]
-                    ]
+                row
+                for row in readList
+                if row[1] == inLanguageF and termInArgF in row[2]
+            ]
 
             for row in foundedTerm:
                 print(row)
 
-        
         findTermInLang()
+
 
 def argL(searchPattern):
     with open(realPath + '/abbreviationList.csv') as abbreviationList:
         abbList = csv.reader(abbreviationList, delimiter='\t')
         abbreviation = [row for row in abbList if searchPattern in row]
         print(abbreviation)
+
 
 # Fetching
 def argR(fromLanguage, toLanguage, term):
@@ -174,14 +198,15 @@ def argR(fromLanguage, toLanguage, term):
     query = '&query='
 
     # Join everything to perform the search
-    search = fromReference + fromLanguage + toReference + toLanguage + query + term 
+    search = fromReference + fromLanguage +\
+        toReference + toLanguage + query + term
     res = requests.get('https://tatoeba.org/eng/sentences/search?', search)
     res.raise_for_status()
 
     ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
     elements = ttbksoup.find_all('div', class_='sentence translations'.split())
-    print("\n".join("{}".format(el.find('div', class_='text').get_text()) for \
-            el in elements), '\n')
+    print("\n".join("{}".format(el.find('div', class_='text').get_text()) for
+                    el in elements), '\n')
 
     try:
         pagination = ttbksoup.find('md-icon', class_='next')
@@ -193,16 +218,17 @@ def argR(fromLanguage, toLanguage, term):
             res.raise_for_status()
 
             ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
-            elements = ttbksoup.find_all('div', class_='sentence translations'.split())
-            print("\n".join("{}".format(el.find('div', class_='text').get_text()) for \
-                    el in elements), '\n')
+            elements = ttbksoup.find_all(
+                'div', class_='sentence translations'.split())
+            print("\n".join("{}".format(
+                el.find('div', class_='text').get_text())
+                for el in elements), '\n')
         else:
             pass
 
-
     except:
         pass
-        
+
 
 def argS(inLanguageS, toLanguageS, termInArgS):
     findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS)
@@ -210,13 +236,16 @@ def argS(inLanguageS, toLanguageS, termInArgS):
 # --------------------------
 # Define command line menu function
 
+
 def main():
 
     # Set commanline argments
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-b", help="Open a browser and show the result", nargs=3)
+    parser.add_argument(
+        "-b", help="Open a browser and show the result", nargs=3
+    )
 
     parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
             perform offline searchs", nargs=1)
@@ -234,7 +263,8 @@ def main():
             main search on the homepage", nargs=3)
 
     parser.add_argument("-s", help="Search for sentences containing term in a \
-            specific language and it the counterparts of the sentence in another \
+            specific language and it the counterparts of the sentence \
+            in another \
             language", nargs=3)
 
     args = parser.parse_args()
@@ -248,7 +278,7 @@ def main():
     elif args.f:
         inLanguageF = args.f[0]
         termInArgF = args.f[1]
-        argF(inLanguageF,termInArgF)
+        argF(inLanguageF, termInArgF)
 
     elif args.d:
         downloadFile = args.d[0]
@@ -275,7 +305,7 @@ def main():
         argS(inLanguageS, toLanguageS, termInArgS)
 
     else:
-        print ("Ooops!")
+        print("Ooops!")
 
 
 # ---------------------------
