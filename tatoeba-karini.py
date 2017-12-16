@@ -171,10 +171,9 @@ def argF(inLanguageF, termInArgF):
         # function responsible for making the search AND looping the matches
         def findTermInLang():
             foundedTerm = [
-                    row
-                    for row in readList
-                    if row[1] == inLanguageF and termInArgF in row[2]
-                    ]
+                row
+                for row in readList
+                if row[1] == inLanguageF and termInArgF in row[2]]
 
             for row in foundedTerm:
                 print(row)
@@ -204,8 +203,8 @@ def argR(fromLanguage, toLanguage, term):
 
     ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
     elements = ttbksoup.find_all('div', class_='sentence translations'.split())
-    print("\n".join("{}".format(el.find('div', class_='text').get_text()) for \
-            el in elements), '\n')
+    print("\n".join("{}".format(el.find('div', class_='text').get_text()) for
+                    el in elements), '\n')
 
     try:
         pagination = ttbksoup.find('md-icon', class_='next')
@@ -218,7 +217,7 @@ def argR(fromLanguage, toLanguage, term):
 
             ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
             elements = ttbksoup.find_all(
-                    'div', class_='sentence translations'.split())
+                'div', class_='sentence translations'.split())
             print("\n".join("{}".format(el.find(
                 'div', class_='text').get_text()) for el in elements), '\n')
 
@@ -275,7 +274,7 @@ def main():
     elif args.f:
         inLanguageF = args.f[0]
         termInArgF = args.f[1]
-        argF(inLanguageF,termInArgF)
+        argF(inLanguageF, termInArgF)
 
     elif args.d:
         downloadFile = args.d[0]
@@ -302,7 +301,7 @@ def main():
         argS(inLanguageS, toLanguageS, termInArgS)
 
     else:
-        print ("Ooops!")
+        print("Ooops!")
 
 
 # ---------------------------
