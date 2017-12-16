@@ -74,7 +74,7 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
 # Define argument function
 
 
-def argB(fromLanguage, toLanguage, term):
+def browserWrapper(fromLanguage, toLanguage, term):
     # Open tatoeba.org in a new tab browser performing a search
 
     # ArgB variables
@@ -90,7 +90,7 @@ def argB(fromLanguage, toLanguage, term):
     )
 
 
-def argD(downloadFile):
+def downloadWrapper(downloadFile):
     def downloadTool():
         with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
             print('Downloading the ',
@@ -150,7 +150,7 @@ def argD(downloadFile):
         print('Just head to https://tatoeba.org/eng/downloads.\n')
 
 
-def argI(sentenceId):
+def idWrapper(sentenceId):
     """
     Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
     Use it to get more information about the sentence.
@@ -160,12 +160,12 @@ def argI(sentenceId):
     )
 
 
-def argF(inLanguageF, termInArgF):
+def findWrapper(inLanguageF, termInArgF):
 
     # Make use of the 'sentences.csv' file to to find a sentence containing
     # a term in an language
 
-    # argF variables
+    # findWrapper variables
     with open(realPath + '/sentences.csv') as listFile:
         readList = csv.reader(listFile, delimiter='\t')
 
@@ -183,7 +183,7 @@ def argF(inLanguageF, termInArgF):
         findTermInLang()
 
 
-def argL(searchPattern):
+def listAbbreviationWrapper(searchPattern):
     with open(realPath + '/abbreviationList.csv') as abbreviationList:
         abbList = csv.reader(abbreviationList, delimiter='\t')
         abbreviation = [row for row in abbList if searchPattern in row]
@@ -191,7 +191,7 @@ def argL(searchPattern):
 
 
 # Fetching
-def argR(fromLanguage, toLanguage, term):
+def requestWrapper(fromLanguage, toLanguage, term):
 
     fromReference = 'from='
     toReference = '&to='
@@ -230,7 +230,7 @@ def argR(fromLanguage, toLanguage, term):
         pass
 
 
-def argS(inLanguageS, toLanguageS, termInArgS):
+def searchWrapper(inLanguageS, toLanguageS, termInArgS):
     findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS)
 
 # --------------------------
@@ -273,36 +273,36 @@ def main():
         fromLanguage = args.b[0]
         toLanguage = args.b[1]
         term = args.b[2]
-        argB(fromLanguage, toLanguage, term)
+        browserWrapper(fromLanguage, toLanguage, term)
 
     elif args.f:
         inLanguageF = args.f[0]
         termInArgF = args.f[1]
-        argF(inLanguageF, termInArgF)
+        findWrapper(inLanguageF, termInArgF)
 
     elif args.d:
         downloadFile = args.d[0]
-        argD(downloadFile)
+        downloadWrapper(downloadFile)
 
     elif args.i:
         sentenceId = args.i[0]
-        argI(sentenceId)
+        idWrapper(sentenceId)
 
     elif args.l:
         searchPattern = args.l[0]
-        argL(searchPattern)
+        listAbbreviationWrapper(searchPattern)
 
     elif args.r:
         fromLanguage = args.r[0]
         toLanguage = args.r[1]
         term = args.r[2]
-        argR(fromLanguage, toLanguage, term)
+        requestWrapper(fromLanguage, toLanguage, term)
 
     elif args.s:
         inLanguageS = args.s[0]
         toLanguageS = args.s[1]
         termInArgS = args.s[2]
-        argS(inLanguageS, toLanguageS, termInArgS)
+        searchWrapper(inLanguageS, toLanguageS, termInArgS)
 
     else:
         print("Ooops!")
