@@ -47,6 +47,11 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
 
 
 def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
+    """
+    Check on the file `sentences.csv` if a translation exists. If it does, it
+    will be printed, or else, move on to the next iteration.
+    """
+
     global sentences
     global translationsList
 
