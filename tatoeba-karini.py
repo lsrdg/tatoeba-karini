@@ -222,6 +222,12 @@ def findWrapper(inLanguageF, termInArgF):
 
 
 def listAbbreviationWrapper(searchPattern):
+    """
+    Look for the abbreviation of language.
+    Necessary for the off line searches.
+    The abbreviations follow Tatoeba's pattern.
+    """
+
     with open(realPath + '/abbreviationList.csv') as abbreviationList:
         abbList = csv.reader(abbreviationList, delimiter='\t')
         abbreviation = [row for row in abbList if searchPattern in row]
