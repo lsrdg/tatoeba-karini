@@ -226,7 +226,7 @@ def argR(fromLanguage, toLanguage, term):
         else:
             pass
 
-    except:
+    except AttributeError:
         pass
 
 
