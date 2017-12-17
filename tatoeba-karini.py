@@ -111,7 +111,17 @@ def browserWrapper(fromLanguage, toLanguage, term):
 
 
 def downloadWrapper(downloadFile):
+    """
+    Wrapper for the download functionality.
+    Download and uncompress the files needed by the offline search/find
+    functionalities.
+    """
+
     def downloadTool():
+        """
+        Download the `sentences.csv` file or the `links.csv` file.
+        """
+
         with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
             print('Downloading the ',
                   downloadFile, 'file, in the \'.tar.bz2\' format.')
@@ -129,6 +139,10 @@ def downloadWrapper(downloadFile):
             print('Download finished.\n\n')
 
     def uncompressTool():
+        """
+        Uncompress the downloaded file.
+        """
+
         print('\n\nUncompressing the', downloadFile, 'file. Please wait.')
         untarFile = tarfile.open(realPath + downloadFile + '.tar.bz2', 'r:bz2')
         untarFile.extractall(realPath)
