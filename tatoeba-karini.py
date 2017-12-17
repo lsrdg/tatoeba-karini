@@ -342,8 +342,11 @@ def searchWrapper(inLanguageS, toLanguageS, termInArgS):
 
 
 def main():
-
-    # Set commanline argments
+    """
+    Main function.
+    Set the argument parser.
+    Call the wrapper function accordingly to the argument passed by the user.
+    """
 
     parser = argparse.ArgumentParser()
 
