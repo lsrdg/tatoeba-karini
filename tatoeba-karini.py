@@ -329,6 +329,12 @@ def requestWrapper(fromLanguage, toLanguage, term):
 
 
 def searchWrapper(inLanguageS, toLanguageS, termInArgS):
+    """
+    Wrapper for the search functionality, which despite
+    of its complexity, is implemented with the use of the
+    'find' functionality.
+    """
+
     findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS)
 
 # --------------------------
