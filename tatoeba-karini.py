@@ -92,7 +92,10 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
 
 
 def browserWrapper(fromLanguage, toLanguage, term):
-    # Open tatoeba.org in a new tab browser performing a search
+    """
+    Wrapper to the 'browser' functionality.
+    Open tatoeba.org in a new tab browser performing a search
+    """
 
     # ArgB variables
     fromReference = '&from='
