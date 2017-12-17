@@ -68,6 +68,14 @@ def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
 
 
 def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
+    """
+    Takes the user input and checks if there is a sentence containing the
+    searched term in the desired source language.
+
+    If there is, move on and call `findTranslation()` to find possible
+    translations. If not, pass.
+    """
+
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         global sentences
