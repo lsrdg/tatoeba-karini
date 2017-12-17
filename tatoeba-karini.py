@@ -22,6 +22,10 @@ translationsList = []
 
 
 def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
+    """
+    Make use of the file `links.csv` to check if a sentence has a translation
+    in the target language specified by the user.
+    """
 
     global translationID
     global toLanguage
