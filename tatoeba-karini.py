@@ -195,16 +195,20 @@ def idWrapper(sentenceId):
 
 
 def findWrapper(inLanguageF, termInArgF):
-
-    # Make use of the 'sentences.csv' file to to find a sentence containing
-    # a term in an language
+    """
+    Wrapper for the `find` functionality.
+    Make use of the 'sentences.csv' file to to find a sentence containing
+    a term in an language.
+    """
 
     # findWrapper variables
     with open(realPath + '/sentences.csv') as listFile:
         readList = csv.reader(listFile, delimiter='\t')
 
-        # function responsible for making the search AND looping the matches
         def findTermInLang():
+            """
+            function responsible for making the search AND looping the matches.
+            """
             foundedTerm = [
                 row
                 for row in readList
