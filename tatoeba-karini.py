@@ -236,11 +236,18 @@ def listAbbreviationWrapper(searchPattern):
 
 # Fetching
 def requestGet(search):
+    """
+    Returns an object of the get method of requests.
+    """
+
     res = requests.get(search)
     return(res)
 
 
 def requestPaginationInput(value):
+    """
+    Return whether the user want to see the next page or not.
+    """
     userInput = input(value)
     if userInput == "y":
         return("y")
@@ -251,12 +258,21 @@ def requestPaginationInput(value):
 
 
 def requestPagination(search):
+    """
+    Simulate `requestWrapper()`'s behavior in case the user wants to
+    paginate the results.
+    """
     res = requestGet(search)
     toPrint = requestPrint(res)
     return(toPrint)
 
 
 def requestPrint(value):
+    """
+    Wrapper the 'printing' aspects of `requestWrapper()`.
+    Print sentences and its translations.
+    """
+
     res = value
     res.raise_for_status()
 
@@ -280,6 +296,13 @@ def requestPrint(value):
 
 
 def requestWrapper(fromLanguage, toLanguage, term):
+    """
+    Wrapper for the 'request' functionality.
+    Scrap tatoeba.org.
+
+    Support basic foward pagination.
+    """
+
     urlBase = 'https://tatoeba.org'
     searchBase = '/eng/sentences/search?'
     fromReference = 'from='
