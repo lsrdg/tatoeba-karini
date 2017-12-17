@@ -113,7 +113,7 @@ def browserWrapper(fromLanguage, toLanguage, term):
 def downloadWrapper(downloadFile):
     """
     Wrapper for the download functionality.
-    Download and uncompress the files needed by the offline search/find
+    Download and uncompress the files needed by the off line search/find
     functionalities.
     """
 
@@ -300,7 +300,7 @@ def requestWrapper(fromLanguage, toLanguage, term):
     Wrapper for the 'request' functionality.
     Scrap tatoeba.org.
 
-    Support basic foward pagination.
+    Support basic forward pagination.
     """
 
     urlBase = 'https://tatoeba.org'
