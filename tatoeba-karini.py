@@ -191,43 +191,75 @@ def argL(searchPattern):
 
 
 # Fetching
+def requestGet(search):
+    res = requests.get(search)
+    return(res)
+
+
+def requestPaginationInput(value):
+    userInput = input(value)
+    if userInput == "y":
+        return("y")
+    elif userInput == "n":
+        return("n")
+    else:
+        return(print('Invalid input.'))
+
+
+def requestPagination(search):
+    res = requestGet(search)
+    toPrint = requestPrint(res)
+    return(toPrint)
+
+
+def requestPrint(value):
+    res = value
+    res.raise_for_status()
+
+    ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
+    elements = ttbksoup.find_all('div', class_='sentence translations'.split())
+
+    try:
+        pagination = ttbksoup.find('md-icon', class_='next')
+        if pagination is None:
+            print("\n".join("{}".format(el.find(
+                'div', class_='text').get_text()) for el in elements), '\n')
+            return(False)
+        else:
+            print("\n".join("{}".format(el.find(
+                'div', class_='text').get_text()) for el in elements), '\n')
+            paginationHref = pagination.find('a', href=True)
+            return(paginationHref.get('href'))
+
+    except AttributeError:
+            pass
+
+
 def argR(fromLanguage, toLanguage, term):
 
+    urlBase = 'https://tatoeba.org'
+    searchBase = '/eng/sentences/search?'
     fromReference = 'from='
     toReference = '&to='
     query = '&query='
 
     # Join everything to perform the search
-    search = fromReference + fromLanguage +\
+
+    search = urlBase + searchBase + fromReference + fromLanguage +\
         toReference + toLanguage + query + term
-    res = requests.get('https://tatoeba.org/eng/sentences/search?', search)
-    res.raise_for_status()
+    res = requestGet(search)
 
-    ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
-    elements = ttbksoup.find_all('div', class_='sentence translations'.split())
-    print("\n".join("{}".format(el.find('div', class_='text').get_text()) for
-                    el in elements), '\n')
+    pagination = requestPrint(res)
 
-    try:
-        pagination = ttbksoup.find('md-icon', class_='next')
-        pagination = pagination.find('a', href=True)
-        nextPage = input("Next page? (y/n) ")
-        if nextPage == "y":
-            pageURL = pagination['href']
-            resNext = requests.get('https://tatoeba.org', pageURL)
-            res.raise_for_status()
-
-            ttbksoup = bs4.BeautifulSoup(res.text, 'lxml')
-            elements = ttbksoup.find_all(
-                'div', class_='sentence translations'.split())
-            print("\n".join("{}".format(
-                el.find('div', class_='text').get_text())
-                for el in elements), '\n')
-        else:
-            pass
-
-    except:
-        pass
+    while pagination is not False:
+        nextPage = requestPaginationInput('Next page? (y/n) ')
+        if nextPage == "n":
+            return(print('Ok, no pagination this time...'))
+        elif nextPage == "y":
+            search = urlBase + pagination
+            pagination = requestPagination(search)
+    else:
+        return
 
 
 def argS(inLanguageS, toLanguageS, termInArgS):
