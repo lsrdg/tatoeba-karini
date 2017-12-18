@@ -27,8 +27,6 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
     in the target language specified by the user.
     """
 
-    global testCheckID
-
     with open(realPath + '/links.csv') as links:
         linksList = csv.reader(links, delimiter='\t')
 
