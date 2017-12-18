@@ -27,10 +27,7 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
     in the target language specified by the user.
     """
 
-    global translationID
-    global toLanguage
     global translationsList
-    global testUhuList
     global testCheckID
 
     with open(realPath + '/links.csv') as links:
