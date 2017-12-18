@@ -22,6 +22,10 @@ translationsList = []
 
 
 def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
+    """
+    Make use of the file `links.csv` to check if a sentence has a translation
+    in the target language specified by the user.
+    """
 
     global translationID
     global toLanguage
@@ -43,6 +47,11 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
 
 
 def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
+    """
+    Check on the file `sentences.csv` if a translation exists. If it does, it
+    will be printed, or else, move on to the next iteration.
+    """
+
     global sentences
     global translationsList
 
@@ -59,6 +68,14 @@ def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
 
 
 def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
+    """
+    Takes the user input and checks if there is a sentence containing the
+    searched term in the desired source language.
+
+    If there is, move on and call `findTranslation()` to find possible
+    translations. If not, pass.
+    """
+
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         global sentences
@@ -75,7 +92,10 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
 
 
 def browserWrapper(fromLanguage, toLanguage, term):
-    # Open tatoeba.org in a new tab browser performing a search
+    """
+    Wrapper to the 'browser' functionality.
+    Open tatoeba.org in a new tab browser performing a search
+    """
 
     # ArgB variables
     fromReference = '&from='
@@ -91,7 +111,17 @@ def browserWrapper(fromLanguage, toLanguage, term):
 
 
 def downloadWrapper(downloadFile):
+    """
+    Wrapper for the download functionality.
+    Download and uncompress the files needed by the off line search/find
+    functionalities.
+    """
+
     def downloadTool():
+        """
+        Download the `sentences.csv` file or the `links.csv` file.
+        """
+
         with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
             print('Downloading the ',
                   downloadFile, 'file, in the \'.tar.bz2\' format.')
@@ -109,6 +139,10 @@ def downloadWrapper(downloadFile):
             print('Download finished.\n\n')
 
     def uncompressTool():
+        """
+        Uncompress the downloaded file.
+        """
+
         print('\n\nUncompressing the', downloadFile, 'file. Please wait.')
         untarFile = tarfile.open(realPath + downloadFile + '.tar.bz2', 'r:bz2')
         untarFile.extractall(realPath)
@@ -161,16 +195,20 @@ def idWrapper(sentenceId):
 
 
 def findWrapper(inLanguageF, termInArgF):
-
-    # Make use of the 'sentences.csv' file to to find a sentence containing
-    # a term in an language
+    """
+    Wrapper for the `find` functionality.
+    Make use of the 'sentences.csv' file to to find a sentence containing
+    a term in an language.
+    """
 
     # findWrapper variables
     with open(realPath + '/sentences.csv') as listFile:
         readList = csv.reader(listFile, delimiter='\t')
 
-        # function responsible for making the search AND looping the matches
         def findTermInLang():
+            """
+            function responsible for making the search AND looping the matches.
+            """
             foundedTerm = [
                 row
                 for row in readList
@@ -184,6 +222,12 @@ def findWrapper(inLanguageF, termInArgF):
 
 
 def listAbbreviationWrapper(searchPattern):
+    """
+    Look for the abbreviation of language.
+    Necessary for the off line searches.
+    The abbreviations follow Tatoeba's pattern.
+    """
+
     with open(realPath + '/abbreviationList.csv') as abbreviationList:
         abbList = csv.reader(abbreviationList, delimiter='\t')
         abbreviation = [row for row in abbList if searchPattern in row]
@@ -192,11 +236,18 @@ def listAbbreviationWrapper(searchPattern):
 
 # Fetching
 def requestGet(search):
+    """
+    Returns an object of the get method of requests.
+    """
+
     res = requests.get(search)
     return(res)
 
 
 def requestPaginationInput(value):
+    """
+    Return whether the user want to see the next page or not.
+    """
     userInput = input(value)
     if userInput == "y":
         return("y")
@@ -207,12 +258,21 @@ def requestPaginationInput(value):
 
 
 def requestPagination(search):
+    """
+    Simulate `requestWrapper()`'s behavior in case the user wants to
+    paginate the results.
+    """
     res = requestGet(search)
     toPrint = requestPrint(res)
     return(toPrint)
 
 
 def requestPrint(value):
+    """
+    Wrapper the 'printing' aspects of `requestWrapper()`.
+    Print sentences and its translations.
+    """
+
     res = value
     res.raise_for_status()
 
@@ -236,6 +296,13 @@ def requestPrint(value):
 
 
 def requestWrapper(fromLanguage, toLanguage, term):
+    """
+    Wrapper for the 'request' functionality.
+    Scrap tatoeba.org.
+
+    Support basic forward pagination.
+    """
+
     urlBase = 'https://tatoeba.org'
     searchBase = '/eng/sentences/search?'
     fromReference = 'from='
@@ -262,6 +329,12 @@ def requestWrapper(fromLanguage, toLanguage, term):
 
 
 def searchWrapper(inLanguageS, toLanguageS, termInArgS):
+    """
+    Wrapper for the search functionality, which despite
+    of its complexity, is implemented with the use of the
+    'find' functionality.
+    """
+
     findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS)
 
 # --------------------------
@@ -269,8 +342,11 @@ def searchWrapper(inLanguageS, toLanguageS, termInArgS):
 
 
 def main():
-
-    # Set commanline argments
+    """
+    Main function.
+    Set the argument parser.
+    Call the wrapper function accordingly to the argument passed by the user.
+    """
 
     parser = argparse.ArgumentParser()
 
