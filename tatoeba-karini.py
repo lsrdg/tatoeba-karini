@@ -46,8 +46,6 @@ def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
     will be printed, or else, move on to the next iteration.
     """
 
-    global sentences
-
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
         for row in sentencesList:
@@ -71,7 +69,6 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
 
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
-        global sentences
 
         for row in sentencesList:
             if row[1] == inLanguageS and termInArgS in row[2]:
