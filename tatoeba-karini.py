@@ -27,12 +27,6 @@ def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
     in the target language specified by the user.
     """
 
-    global translationID
-    global toLanguage
-    global translationsList
-    global testUhuList
-    global testCheckID
-
     with open(realPath + '/links.csv') as links:
         linksList = csv.reader(links, delimiter='\t')
 
@@ -51,9 +45,6 @@ def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
     Check on the file `sentences.csv` if a translation exists. If it does, it
     will be printed, or else, move on to the next iteration.
     """
-
-    global sentences
-    global translationsList
 
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
@@ -78,8 +69,6 @@ def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
 
     with open(realPath + '/sentences.csv') as sentencesListing:
         sentencesList = csv.reader(sentencesListing, delimiter='\t')
-        global sentences
-        global translationsList
 
         for row in sentencesList:
             if row[1] == inLanguageS and termInArgS in row[2]:
