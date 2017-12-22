@@ -27,7 +27,14 @@ about.
 
 ## Requirements 
 
-Probably Python 3.\*. So far, it has been used only on Archlinux with Python 3.6.
+Python 3.\*. It was written on Archlinux with Python 3.6.
+Theoretically, it should work on any system with support to Python 3.
+
+For a complete list, please take a look at
+[`requirements.txt`](requirements.txt).
+
+If you care, please open an issue sharing how was your experience on your
+environment.
 
 ### Requirements for offline searches
 
