@@ -1,8 +1,8 @@
 # Tatoeba-karini
 
-Consult tatoeba.org from the command line.
+tatoeba.org on the command line.
 
-WARNING: this project is **extremely experimental**. (:
+WARNING: this project is **extremely experimental**. Join us (:
 
 > Tatoeba.org is a free collaborative online database of example sentences geared
 > towards foreign language learners. Its name comes from the Japanese term
@@ -24,17 +24,6 @@ I was missing was access to the great material available on Tatoeba, not any mor
 
 And in order to learn Python and programming, I needed a project that I do care 
 about.
-
-## Current stage
-
-Tatoeba-karini is currently on its `0.0.*` version. The `0.1` version will come
-when:
-
-- the offline searching gets rewritten and improved (regex and performance)
-- the html parser is able to paginate the results
-- there is a proper, complete and built-in documentation
-
-Untill then, the project remains unstable and experimental. 
 
 ## Requirements 
 
