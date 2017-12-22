@@ -50,6 +50,8 @@ The files should be:
 - decompressed (`$ tar -xvfj sentences.csv`)
 - be sure it is placed on the root of the Tatoeba-karini directory
 
+**Heads up!** The `-d` command can download and prepare the file for you.
+
 ## Usage 
 
 ```
