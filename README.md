@@ -25,6 +25,21 @@ I was missing was access to the great material available on Tatoeba, not any mor
 And in order to learn Python and programming, I needed a project that I do care 
 about.
 
+## Roadmap
+
+You can the follow the [milestones of the
+project](https://github.com/lsrdg/tatoeba-karini/milestones).
+
+**Short term**: until `v0.1`, the focus will be on improving what already
+exists, both terms of code and user experience.
+
+**Long term**: improve what already exists and add more functionality 
+
+- to be an alternative to offline use of Tatoeba
+- export data (`.csv` files, e.g. to be used on [Anki](https://apps.ankiweb.net/)
+- strong REGEX parser
+- more ways to interact with Tatoeba and all the material provided by it
+
 ## Requirements 
 
 Python 3.\*. It was written on Archlinux with Python 3.6.
