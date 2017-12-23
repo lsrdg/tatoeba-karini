@@ -139,3 +139,13 @@ The repository on Gitlab is to anyone who doesn't want to bother
 with Github to have an alternative to report issue. Keep mind that (at least for
 now) everything will be redirected to Github.
 
+## Thank you!
+
+Special thanks to the team of Tatoeba.org for keeping this amazing project
+alive!
+
+Another special thanks goes to @Spindel for the guidance and great suggestions.
+
+In a matter of fact, thanks to those who cared to open an issue, star and/or
+fork.
+That's great to be aware of other people looking for this kind of stuff. (:
