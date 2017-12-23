@@ -73,6 +73,13 @@ The files should be:
 python tatoeba-karini [OPTION] [OPTION'S ARGUMENTS]
 ```
 
+The script can perform different actions, such as:
+
+- Open tatoeba.org on the browser
+- Scrap tatoeba.org performing a search
+- Search off line making use of the [sentences' file](https://tatoeba.org/eng/downloads)
+
+
 | Optional command | Description                                                                                                             | Required arguments | Syntax                                  | Example                                  |
 |------------------|-------------------------------------------------------------------------------------------------------------------------|--------------------|-----------------------------------------|------------------------------------------|
 | -b               | Open the browser in a new tab performing a search on tatoeba.org                                                        | 3                  | -b [FROM-LANGUAGE] [TO-LANGUAGE]        | `$ tatoeba-karini -b eng jpn breath`     |
