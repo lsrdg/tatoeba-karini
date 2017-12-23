@@ -128,3 +128,14 @@ If you have any problem while using Tatoeba-karini, **please**:
 - And create an issue here. Any feedback is a good feedback. (:
 - being the only user, I have no idea how it behaves over there, let me know if
   you don't mind.
+
+The project is being maintained on Github:
+https://github.com/lsrdg/tatoeba-karini
+
+However, there is a mirror of it on Gitlab:
+https://gitlab.com/lsrdg/tatoeba-karini
+
+The repository on Gitlab is to anyone who doesn't want to bother
+with Github to have an alternative to report issue. Keep mind that (at least for
+now) everything will be redirected to Github.
+
