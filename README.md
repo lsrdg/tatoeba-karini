@@ -97,25 +97,16 @@ About the commands and their current state:
 
 - There are two commands for **opening** Tatoeba.org from the command line (`-b`,
   `-i`), and they _should_ just work. There are also other commands that should
-  get their own 'open in the browser' version.
+  get their own 'open in the browser' version on the future.
 
 - All the offline commands need improvement. `-f` is working pretty well for my
   personal use, but still need some REGEX to work as it should. `-s` is the worst 
   of all of them, taking several minutes to perform even the most basic search.
-  The uneficiency of these commands reflect how much I need to learn, any help
+  The inefficiency of these commands reflect how much I need to learn, any help
   welcome. (:
 
 - The fetching/scrapping command `-r` is not perfect, but it is what I had in
-  mind before this project got started. Support for multiple pages and REGEX
-  planned.
-
-- Before falling in the rabbit hole of Vimscripting, the plan is to first
-  improve the python's performance. That said, in the meanwhile, Tatoeba-karini
-  works great _for me_ with the Neovim terminal, being already a great part of
-  my writing/studying/working workflow. o/
-
-- All these notes and this bizarre documentation of something that probably
-  noone else is gonna use might be senseless, but who knows... o_O
+  mind before this project got started. A better support for multiple pages planned.
   
 ## License
 
