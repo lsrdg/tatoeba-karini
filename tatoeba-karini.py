@@ -330,11 +330,9 @@ def searchWrapper(inLanguageS, toLanguageS, termInArgS):
 # Define command line menu function
 
 
-def main():
+def parse_arguments():
     """
-    Main function.
-    Set the argument parser.
-    Call the wrapper function accordingly to the argument passed by the user.
+    Parse and return arguments.
     """
 
     parser = argparse.ArgumentParser()
@@ -364,6 +362,18 @@ def main():
             language", nargs=3)
 
     args = parser.parse_args()
+
+    return(args)
+
+
+def main():
+    """
+    Main function.
+    Set the argument parser.
+    Call the wrapper function accordingly to the argument passed by the user.
+    """
+
+    args = parse_arguments()
 
     if args.b:
         fromLanguage = args.b[0]
