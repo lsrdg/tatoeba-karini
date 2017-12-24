@@ -141,23 +141,22 @@ def downloadWrapper(downloadFile):
     if downloadFile == 'sentences' or downloadFile == 'links':
         pass
     elif downloadFile != 'sentences' or downloadFile != 'links':
-        print(
-            "Wrong file name. Please, choose between 'sentences' and 'links'.")
-        print("Consult the README file to learn more about their usage.")
+        print("""
+            Wrong file name. Please, choose between 'sentences' and 'links'.
+            Consult the README file to learn more about their usage.
+              """)
         return
 
     print("""
             \nYou will be downloading this file directly
-            from https://tatoeba.org/eng/downloads.
-            """)
-    print('Keep in mind that this file is released under CC-BY.')
-    print("""
-            But if you would like more information about the file,
-            check the link above.
-            """)
-    print('You should also keep in mind that this file can be around 100mb.')
-    print('\nThe file will be downloaded and uncompressed.')
-    print('\n\nWould you like to proceed? (y/n)')
+            \nfrom https://tatoeba.org/eng/downloads.
+            \nKeep in mind that this file is released under CC-BY.
+            \nBut if you would like more information about the file,
+            \n\ncheck the link above.
+            \nYou should also keep in mind that this file can be around 100mb.
+            \nThe file will be downloaded and uncompressed.')
+            \n\nWould you like to proceed? (y/n)')
+           """)
 
     askForDownload = input('> ')
 
@@ -169,8 +168,9 @@ def downloadWrapper(downloadFile):
         print("""
                 \n\nNo problems. You can always download and
                 extract the files manually.
+                Just head to https://tatoeba.org/eng/downloads.
+                \n
               """)
-        print('Just head to https://tatoeba.org/eng/downloads.\n')
 
 
 def idWrapper(sentenceId):
