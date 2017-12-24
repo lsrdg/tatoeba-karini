@@ -1,8 +1,21 @@
 # Tatoeba-karini
 
-tatoeba.org on the command line.
+[![Build
+Status](https://travis-ci.org/lsrdg/tatoeba-karini.svg?branch=master)](https://travis-ci.org/lsrdg/tatoeba-karini)
 
-WARNING: this project is **extremely experimental**. Join us (:
+---
+
+tatoeba.org from the command line.
+
+Tatoeba-karini can assist you on opening and scrapping tatoeba.org from the
+terminal, find sentences and translations without internet connection and some
+commands to help on the general usage of the script (e.g. downloading and uncompressing
+needed files).
+
+The project is currently on
+**[v0.0.5](https://github.com/lsrdg/tatoeba-karini/releases/tag/v0.0.5)**.
+
+WARNING: this project is **extremely experimental**. Come together! (:
 
 > Tatoeba.org is a free collaborative online database of example sentences geared
 > towards foreign language learners. Its name comes from the Japanese term
@@ -16,6 +29,7 @@ WARNING: this project is **extremely experimental**. Join us (:
 
 _from [Wikipedia](https://en.wikipedia.org/wiki/Tatoeba)_ 
 
+
 ## Why?/Motivation
 
 If you work on the command line and deal with language stuff, you probably make
@@ -27,7 +41,7 @@ about.
 
 ## Roadmap
 
-You can the follow the [milestones of the
+You can follow the [milestones of the
 project](https://github.com/lsrdg/tatoeba-karini/milestones).
 
 **Short term**: until `v0.1`, the focus will be on improving what already
