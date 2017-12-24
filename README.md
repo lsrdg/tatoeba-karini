@@ -1,4 +1,4 @@
-# Tatoeba-query
+# Tatoeba-karini
 
 Open tatoeba.org from the command line.
 
@@ -15,18 +15,18 @@ sure have the file containing the sentences:
 The file should be: 
 - downloaded (yes, that's right, more than 80MB, about 5511497 lines of pure joy)
 - decompressed (`$ tar -xvfj sentences.csv`)
-- be sure it is placed on the root of the Tatoeba-query directory
+- be sure it is placed on the root of the Tatoeba-karini directory
 
 ## Usage 
 
 ```
-python tatoeba-query [OPTION] [OPTION'S ARGUMENTS]
+python tatoeba-karini [OPTION] [OPTION'S ARGUMENTS]
 ```
 
 | Optional command | Description | Arguments needed | Syntax | Example |
 |------------------|-------------|------------------|--------|---------|
-| -b               | Open the browser in a new tab performing a search on tatoeba.org | 3 | tatoeba-query -b [FROM-LANGUAGE] [TO-LANGUAGE] | `$ tatoeba-query -b eng jpn breath` |
-| -f               | Find sentences in X language containing the Y-term | 2 | tatoeba-query -f [IN-LANGUAGE] [TERM] | `$ tatoeba-query -f yor water` |
+| -b               | Open the browser in a new tab performing a search on tatoeba.org | 3 | tatoeba-karini -b [FROM-LANGUAGE] [TO-LANGUAGE] | `$ tatoeba-karini -b eng jpn breath` |
+| -f               | Find sentences in X language containing the Y-term | 2 | tatoeba-karini -f [IN-LANGUAGE] [TERM] | `$ tatoeba-karini -f yor water` |
 
 
 ## TODO list
@@ -41,14 +41,14 @@ python tatoeba-query [OPTION] [OPTION'S ARGUMENTS]
 
 All the creative content is licensed by [Tatoeba.org](https://tatoeba.org)under CC-BY 2.0.
 
-Tatoeba-query is a _personal_ project, which aims to provide a faster way to
+Tatoeba-karini is a _personal_ project, which aims to provide a faster way to
 check the amazing resource of Tatoeba.org from the command line. I'm working on
 it **as** and **while** learning to program independently. By no means it should
 be used for something serious.
 
 ## Issues, bugs, contributions
 
-If you have any problem while using Tatoeba-query, **please**:
+If you have any problem while using Tatoeba-karini, **please**:
 
 - do **not** bother the Tatoeba's team. They are already doing an amazing work
   out there. (:
