@@ -1,8 +1,21 @@
 # Tatoeba-karini
 
-Consult tatoeba.org from the command line.
+[![Build
+Status](https://travis-ci.org/lsrdg/tatoeba-karini.svg?branch=master)](https://travis-ci.org/lsrdg/tatoeba-karini)
 
-WARNING: this project is **extremely experimental**. (:
+---
+
+tatoeba.org from the command line.
+
+Tatoeba-karini can assist you on opening and scrapping tatoeba.org from the
+terminal, find sentences and translations without internet connection and some
+commands to help on the general usage of the script (e.g. downloading and uncompressing
+needed files).
+
+The project is currently on
+**[v0.0.5](https://github.com/lsrdg/tatoeba-karini/releases/tag/v0.0.5)**.
+
+WARNING: this project is **extremely experimental**. Come together! (:
 
 > Tatoeba.org is a free collaborative online database of example sentences geared
 > towards foreign language learners. Its name comes from the Japanese term
@@ -16,6 +29,7 @@ WARNING: this project is **extremely experimental**. (:
 
 _from [Wikipedia](https://en.wikipedia.org/wiki/Tatoeba)_ 
 
+
 ## Why?/Motivation
 
 If you work on the command line and deal with language stuff, you probably make
@@ -25,20 +39,31 @@ I was missing was access to the great material available on Tatoeba, not any mor
 And in order to learn Python and programming, I needed a project that I do care 
 about.
 
-## Current stage
+## Roadmap
 
-Tatoeba-karini is currently on its `0.0.*` version. The `0.1` version will come
-when:
+You can follow the [milestones of the
+project](https://github.com/lsrdg/tatoeba-karini/milestones).
 
-- the offline searching gets rewritten and improved (regex and performance)
-- the html parser is able to paginate the results
-- there is a proper, complete and built-in documentation
+**Short term**: until `v0.1`, the focus will be on improving what already
+exists, both terms of code and user experience.
 
-Untill then, the project remains unstable and experimental. 
+**Long term**: improve what already exists and add more functionality 
+
+- to be an alternative to offline use of Tatoeba
+- export data (`.csv` files, e.g. to be used on [Anki](https://apps.ankiweb.net/)
+- strong REGEX parser
+- more ways to interact with Tatoeba and all the material provided by it
 
 ## Requirements 
 
-Probably Python 3.\*. So far, it has been used only on Archlinux with Python 3.6.
+Python 3.\*. It was written on Archlinux with Python 3.6.
+Theoretically, it should work on any system with support to Python 3.
+
+For a complete list, please take a look at
+[`requirements.txt`](requirements.txt).
+
+If you care, please open an issue sharing how was your experience on your
+environment.
 
 ### Requirements for offline searches
 
@@ -54,11 +79,20 @@ The files should be:
 - decompressed (`$ tar -xvfj sentences.csv`)
 - be sure it is placed on the root of the Tatoeba-karini directory
 
+**Heads up!** The `-d` command can download and prepare the file for you.
+
 ## Usage 
 
 ```
 python tatoeba-karini [OPTION] [OPTION'S ARGUMENTS]
 ```
+
+The script can perform different actions, such as:
+
+- Open tatoeba.org on the browser
+- Scrap tatoeba.org performing a search
+- Search off line making use of the [sentences' file](https://tatoeba.org/eng/downloads)
+
 
 | Optional command | Description                                                                                                             | Required arguments | Syntax                                  | Example                                  |
 |------------------|-------------------------------------------------------------------------------------------------------------------------|--------------------|-----------------------------------------|------------------------------------------|
@@ -71,42 +105,22 @@ python tatoeba-karini [OPTION] [OPTION'S ARGUMENTS]
 | -d               | Download files (`links` or `sentences`) from Tatoeba.org in order to perform offline searchs                            | 1                  | -d [FILE]                               | `$ tatoeba-karini -d links`              |
 
 
-## TODO list
-
-- [x] Open Tatoeba.org from the command line
-- [x] Query even if [offline](https://tatoeba.org/eng/downloads)
-- [x] Create a command to list all language's abbreviations used by Tatoeba
-- [x] Search Tatoeba.org by sentence's ID
-- [x] Fetch data back to the shell (in instead of opening the browser)
-- [ ] Create a Vim/Neovim plugin and enjoy it o/
-- [x] Download and uncompress files as needed
-- [ ] Improve performance, clean the code of everything
-
 ### Notes
 
 About the commands and their current state:
 
 - There are two commands for **opening** Tatoeba.org from the command line (`-b`,
   `-i`), and they _should_ just work. There are also other commands that should
-  get their own 'open in the browser' version.
+  get their own 'open in the browser' version on the future.
 
 - All the offline commands need improvement. `-f` is working pretty well for my
   personal use, but still need some REGEX to work as it should. `-s` is the worst 
   of all of them, taking several minutes to perform even the most basic search.
-  The uneficiency of these commands reflect how much I need to learn, any help
+  The inefficiency of these commands reflect how much I need to learn, any help
   welcome. (:
 
 - The fetching/scrapping command `-r` is not perfect, but it is what I had in
-  mind before this project got started. Support for multiple pages and REGEX
-  planned.
-
-- Before falling in the rabbit hole of Vimscripting, the plan is to first
-  improve the python's performance. That said, in the meanwhile, Tatoeba-karini
-  works great _for me_ with the Neovim terminal, being already a great part of
-  my writing/studying/working workflow. o/
-
-- All these notes and this bizarre documentation of something that probably
-  noone else is gonna use might be senseless, but who knows... o_O
+  mind before this project got started. A better support for multiple pages planned.
   
 ## License
 
@@ -126,3 +140,24 @@ If you have any problem while using Tatoeba-karini, **please**:
 - And create an issue here. Any feedback is a good feedback. (:
 - being the only user, I have no idea how it behaves over there, let me know if
   you don't mind.
+
+The project is being maintained on Github:
+https://github.com/lsrdg/tatoeba-karini
+
+However, there is a mirror of it on Gitlab:
+https://gitlab.com/lsrdg/tatoeba-karini
+
+The repository on Gitlab is to anyone who doesn't want to bother
+with Github to have an alternative to report issue. Keep mind that (at least for
+now) everything will be redirected to Github.
+
+## Thank you!
+
+Special thanks to the team of Tatoeba.org for keeping this amazing project
+alive!
+
+Another special thanks goes to @Spindel for the guidance and great suggestions.
+
+In a matter of fact, thanks to those who cared to open an issue, star and/or
+fork.
+That's great to be aware of other people looking for this kind of stuff. (:
