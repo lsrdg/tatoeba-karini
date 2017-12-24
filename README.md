@@ -2,6 +2,8 @@
 
 Consult tatoeba.org from the command line.
 
+**v0.0.4**
+
 WARNING: this project is **extremely experimental**. (:
 
 > Tatoeba.org is a free collaborative online database of example sentences geared
