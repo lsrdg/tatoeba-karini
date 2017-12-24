@@ -1,6 +1,9 @@
 # Tatoeba-query
 
+
 Consult tatoeba.org from the command line.
+
+**v0.0.3**
 
 WARNING: this project is **extremely experimental**. (:
 
