@@ -1,5 +1,8 @@
-import webbrowser, argparse, sys
-#from sys import argv
+import webbrowser
+import argparse
+
+
+# from sys import argv
 
 # script, command, flang, tlang, term = argv
 
@@ -20,8 +23,8 @@ search = term + fromReference + fromLanguage + toReference + toLanguage
 
 
 if args.b:
-    webbrowser.open('https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
+    webbrowser.open(
+        'https://tatoeba.org/eng/sentences/search?query=' + search, new=2)
 
 else:
-    print ("Ooops!")
-
+    print("Ooops!")
