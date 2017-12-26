@@ -2,6 +2,7 @@ import webbrowser
 import argparse
 import os
 import csv
+import re
 import requests
 import bs4
 import tarfile
@@ -335,35 +336,70 @@ def parse_arguments():
     Parse and return arguments.
     """
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser("Tatoeba.org from the command line")
 
-    parser.add_argument(
-        "-b", help="Open a browser and show the result", nargs=3
-    )
+    subparsers = parser.add_subparsers(help="Types of commands")
 
-    parser.add_argument("-d", help="Download files from Tatoeba.org in order to \
-            perform offline searchs", nargs=1)
+    browser_parser = subparsers.add_parser("browser", aliases=["b"], help="Open \
+            a browser and show the result")
+    browser_parser.add_argument("source_language", type=str, help="A three \
+            characters abbreviation of the source language")
+    browser_parser.add_argument("target_language", type=str, help="A three \
+            characters abbreviation of the target language")
+    browser_parser.add_argument("term", type=str, help="The term \
+            to be searched")
+    browser_parser.set_defaults(func=browserWrapper)
 
-    parser.add_argument("-f", help="Find sentence containing term in a specific \
-            language", nargs=2)
+    download_parser = subparsers.add_parser("download", help="Download \
+            files from Tatoeba.org in order to perform offline searchs")
 
-    parser.add_argument("-i", help="Open Tatoeba on the browser searching by \
-            sentence's ID", nargs=1)
+    download_parser.add_argument("file", type=str, help="The file \
+            to be downloaded")
+    download_parser.set_defaults(func=downloadWrapper)
 
-    parser.add_argument("-l", help="List languages and their abbreviation used by \
-            Tatoeba", nargs=1)
+    find_parser = subparsers.add_parser("find", aliases=["f"], help="Find \
+            sentence containing term in a specific language")
+    find_parser.add_argument("target_language", type=str, help="A three \
+            characters abbreviation of the target language")
+    find_parser.add_argument("term", type=str, help="The term to be searched")
+    find_parser.set_defaults(func=findWrapper)
 
-    parser.add_argument("-r", help="Request data from Tatoeba.org, works as the \
-            main search on the homepage", nargs=3)
+    id_parser = subparsers.add_parser("id", help="Open Tatoeba on the \
+            browser searching by sentence's ID")
+    id_parser.add_argument("target_id", type=int, help="The target ID")
+    id_parser.set_defaults(func=idWrapper)
 
-    parser.add_argument("-s", help="Search for sentences containing term in a \
+    list_languages_parser = subparsers.add_parser("list-languages", help="List \
+            languages and their abbreviation used by Tatoeba")
+    list_languages_parser.add_argument("target_language", type=str, help="The \
+            abbreviation of the target language name")
+    list_languages_parser.set_defaults(func=listAbbreviationWrapper)
+
+    scrap_parser = subparsers.add_parser("scrap", aliases=["s"], help="Scrap \
+            data from Tatoeba.org performing a search. \
+            Works as the main search on the homepage")
+    scrap_parser.add_argument("source_language", type=str, help="A three \
+            characters abbreviation of the source language")
+    scrap_parser.add_argument("target_language", type=str, help="A three \
+            characters abbreviation of the target language")
+    scrap_parser.add_argument("term", type=str, help="The term \
+            to be searched")
+    scrap_parser.set_defaults(func=requestWrapper)
+
+    translate_parser = subparsers.add_parser("translate", aliases=["t"], help="Search \
+            for sentences containing term in a \
             specific language and it the counterparts of the sentence \
             in another \
-            language", nargs=3)
+            language")
+    translate_parser.add_argument("source_language", type=str, help="A three \
+            characters abbreviation of the source language")
+    translate_parser.add_argument("target_language", type=str, help="A three \
+            characters abbreviation of the target language")
+    translate_parser.add_argument("term", type=str, help="The term \
+            to be searched")
+    translate_parser.set_defaults(func=searchWrapper)
 
-    args = parser.parse_args()
-
-    return(args)
+    return(vars(parser.parse_args()))
 
 
 def main():
@@ -373,42 +409,48 @@ def main():
     Call the wrapper function accordingly to the argument passed by the user.
     """
 
-    args = parse_arguments()
+    argsDict = parse_arguments()
 
-    if args.b:
-        fromLanguage = args.b[0]
-        toLanguage = args.b[1]
-        term = args.b[2]
+    if re.search("browserWrapper", str(argsDict["func"])):
+        fromLanguage = str(argsDict["source_language"])
+        toLanguage = str(argsDict["target_language"])
+        term = str(argsDict["term"])
+
         browserWrapper(fromLanguage, toLanguage, term)
 
-    elif args.f:
-        inLanguageF = args.f[0]
-        termInArgF = args.f[1]
+    elif re.search("findWrapper", str(argsDict["func"])):
+        inLanguageF = str(argsDict["target_language"])
+        termInArgF = str(argsDict["term"])
+
         findWrapper(inLanguageF, termInArgF)
 
-    elif args.d:
-        downloadFile = args.d[0]
+    elif re.search("downloadWrapper", str(argsDict["func"])):
+        downloadFile = str(argsDict["file"])
+
         downloadWrapper(downloadFile)
 
-    elif args.i:
-        sentenceId = args.i[0]
+    elif re.search("idWrapper", str(argsDict["func"])):
+        sentenceId = str(argsDict["target_id"])
+
         idWrapper(sentenceId)
 
-    elif args.l:
-        searchPattern = args.l[0]
+    elif re.search("listAbbreviationWrapper", str(argsDict["func"])):
+        searchPattern = str(argsDict["target_language"])
+
         listAbbreviationWrapper(searchPattern)
 
-    elif args.r:
-        fromLanguage = args.r[0]
-        toLanguage = args.r[1]
-        term = args.r[2]
+    elif re.search("requestWrapper", str(argsDict["func"])):
+        fromLanguage = str(argsDict["source_language"])
+        toLanguage = str(argsDict["target_language"])
+        term = str(argsDict["term"])
+
         requestWrapper(fromLanguage, toLanguage, term)
 
-    elif args.s:
-        inLanguageS = args.s[0]
-        toLanguageS = args.s[1]
-        termInArgS = args.s[2]
-        searchWrapper(inLanguageS, toLanguageS, termInArgS)
+    elif re.search("searchWrapper", str(argsDict["func"])):
+        fromLanguage = str(argsDict["source_language"])
+        toLanguage = str(argsDict["target_language"])
+        term = str(argsDict["term"])
+        searchWrapper(fromLanguage, toLanguage, term)
 
     else:
         print("Ooops!")
