@@ -101,6 +101,8 @@ The script can perform different actions, such as:
 | `id`               | Open Tatoeba on the browser searching by sentence's ID | 1                  | `$ tatoeba-karini id 825762`             |
 | `download`               | Download files (`links` or `sentences`) from Tatoeba.org in order to perform offline searches                            | 1 | `$ tatoeba-karini download links`              |
 
+> Need help? `$ tatoeba-karini --help` will show a list of the commands, what
+> they do and tell you what you need to make them work.
 
 ### Notes
 
