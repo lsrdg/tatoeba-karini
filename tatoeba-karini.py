@@ -336,12 +336,13 @@ def parse_arguments():
     Parse and return arguments.
     """
 
-    parser = argparse.ArgumentParser("Tatoeba.org from the command line")
+    parser = argparse.ArgumentParser("tatoeba-karini [COMMAND] [ARGUMENT(S)]")
 
     subparsers = parser.add_subparsers(help="Types of commands")
 
     browser_parser = subparsers.add_parser("browser", aliases=["b"], help="Open \
-            a browser and show the result")
+            a new tab in a browser and show the result of a search. Usage: \
+            tatoeba-karini browser [source_language] [target_language] [term]")
     browser_parser.add_argument("source_language", type=str, help="A three \
             characters abbreviation of the source language")
     browser_parser.add_argument("target_language", type=str, help="A three \
@@ -351,33 +352,40 @@ def parse_arguments():
     browser_parser.set_defaults(func=browserWrapper)
 
     download_parser = subparsers.add_parser("download", help="Download \
-            files from Tatoeba.org in order to perform offline searchs")
+            files from Tatoeba.org in order to perform off line searches. \
+            Download either 'sentences.csv' or 'links.csv'. \
+            Usage: tatoeba-karini download [file]")
 
     download_parser.add_argument("file", type=str, help="The file \
             to be downloaded")
     download_parser.set_defaults(func=downloadWrapper)
 
     find_parser = subparsers.add_parser("find", aliases=["f"], help="Find \
-            sentence containing term in a specific language")
+            sentences containing a term in a specific language. Requires the \
+            'sentences.csv' file (reference to the 'download' command). Usage:\
+            tatoeba-karini find [target_language] [term]")
     find_parser.add_argument("target_language", type=str, help="A three \
             characters abbreviation of the target language")
     find_parser.add_argument("term", type=str, help="The term to be searched")
     find_parser.set_defaults(func=findWrapper)
 
     id_parser = subparsers.add_parser("id", help="Open Tatoeba on the \
-            browser searching by sentence's ID")
+            browser searching by sentence's ID. Usage: \
+            tatoeba-karini id [target_id]")
     id_parser.add_argument("target_id", type=int, help="The target ID")
     id_parser.set_defaults(func=idWrapper)
 
     list_languages_parser = subparsers.add_parser("list-languages", help="List \
-            languages and their abbreviation used by Tatoeba")
+            languages and their abbreviation used by Tatoeba. Usage: \
+            tatoeba-karini list-languages [target_language]")
     list_languages_parser.add_argument("target_language", type=str, help="The \
             abbreviation of the target language name")
     list_languages_parser.set_defaults(func=listAbbreviationWrapper)
 
     scrap_parser = subparsers.add_parser("scrap", aliases=["s"], help="Scrap \
             data from Tatoeba.org performing a search. \
-            Works as the main search on the homepage")
+            Works as the main search on the homepage. Usage: \
+            tatoeba-karini scrap [source_language] [target_language] [term]")
     scrap_parser.add_argument("source_language", type=str, help="A three \
             characters abbreviation of the source language")
     scrap_parser.add_argument("target_language", type=str, help="A three \
@@ -387,10 +395,11 @@ def parse_arguments():
     scrap_parser.set_defaults(func=requestWrapper)
 
     translate_parser = subparsers.add_parser("translate", aliases=["t"], help="Search \
-            for sentences containing term in a \
-            specific language and it the counterparts of the sentence \
-            in another \
-            language")
+            for sentences containing term in a specific language and the \
+            translations of the sentence in another language. The local \
+            version of the standard search performed on tatoeba.org. \
+            Usage: tatoeba-karini translate [source_language] \
+            [target_language] [term]")
     translate_parser.add_argument("source_language", type=str, help="A three \
             characters abbreviation of the source language")
     translate_parser.add_argument("target_language", type=str, help="A three \
