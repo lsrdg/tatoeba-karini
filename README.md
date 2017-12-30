@@ -100,6 +100,7 @@ The script can perform different actions, such as:
 | `translate` (or `t`)               | Search for sentences containing term in a specific language and the translation of the sentences in another language | 3 | `$ tatoeba-karini translate eng jpn air`        |
 | `id`               | Open Tatoeba on the browser searching by sentence's ID | 1                  | `$ tatoeba-karini id 825762`             |
 | `download`               | Download files (`links` or `sentences`) from Tatoeba.org in order to perform offline searches                            | 1 | `$ tatoeba-karini download links`              |
+| `--version` (or `-v`) | Prints the version | 0 | `$ tatoeba-karini --version`
 
 > Need help? `$ tatoeba-karini --help` will show a list of the commands, what
 > they do and tell you what you need to make them work.
