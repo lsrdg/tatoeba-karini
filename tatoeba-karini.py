@@ -338,6 +338,8 @@ def parse_arguments():
 
     parser = argparse.ArgumentParser("tatoeba-karini [COMMAND] [ARGUMENT(S)]")
 
+    parser.add_argument("--version", "-v", action="version", version="v0.0.5+")
+
     subparsers = parser.add_subparsers(help="Types of commands")
 
     browser_parser = subparsers.add_parser("browser", aliases=["b"], help="Open \
@@ -460,6 +462,9 @@ def main():
         toLanguage = str(argsDict["target_language"])
         term = str(argsDict["term"])
         searchWrapper(fromLanguage, toLanguage, term)
+
+    elif re.search("version", str(argsDict["func"])):
+        print(argsDict)
 
     else:
         print("Ooops!")
