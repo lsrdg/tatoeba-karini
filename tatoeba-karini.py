@@ -231,7 +231,7 @@ def requestGet(search):
     """
 
     res = requests.get(search)
-    return(res)
+    return res
 
 
 def requestPaginationInput(value):
@@ -240,11 +240,11 @@ def requestPaginationInput(value):
     """
     userInput = input(value)
     if userInput == "y":
-        return("y")
+        return userInput
     elif userInput == "n":
-        return("n")
+        return userInput
     else:
-        return(print('Invalid input.'))
+        return print('Invalid input.')
 
 
 def requestPagination(search):
@@ -254,7 +254,7 @@ def requestPagination(search):
     """
     res = requestGet(search)
     toPrint = requestPrint(res)
-    return(toPrint)
+    return toPrint
 
 
 def requestPrint(value):
@@ -274,12 +274,12 @@ def requestPrint(value):
         if pagination is None:
             print("\n".join("{}".format(el.find(
                 'div', class_='text').get_text()) for el in elements), '\n')
-            return(False)
+            return False
         else:
             print("\n".join("{}".format(el.find(
                 'div', class_='text').get_text()) for el in elements), '\n')
             paginationHref = pagination.find('a', href=True)
-            return(paginationHref.get('href'))
+            return paginationHref.get('href')
 
     except AttributeError:
             pass
@@ -310,7 +310,7 @@ def requestWrapper(fromLanguage, toLanguage, term):
     while pagination is not False:
         nextPage = requestPaginationInput('Next page? (y/n) ')
         if nextPage == "n":
-            return(print('Ok, no pagination this time...'))
+            return print('Ok, no pagination this time...')
         elif nextPage == "y":
             search = urlBase + pagination
             pagination = requestPagination(search)
@@ -410,7 +410,7 @@ def parse_arguments():
             to be searched")
     translate_parser.set_defaults(func=searchWrapper)
 
-    return(vars(parser.parse_args()))
+    return vars(parser.parse_args())
 
 
 def main():
