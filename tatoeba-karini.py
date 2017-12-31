@@ -282,7 +282,7 @@ def requestPrint(value):
             return paginationHref.get('href')
 
     except AttributeError:
-            pass
+        pass
 
 
 def requestWrapper(fromLanguage, toLanguage, term):
