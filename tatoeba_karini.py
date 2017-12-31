@@ -9,9 +9,9 @@ import argparse
 import os
 import csv
 import re
+import tarfile
 import requests
 import bs4
-import tarfile
 
 
 # --------------------------
