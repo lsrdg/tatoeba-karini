@@ -1,3 +1,9 @@
+"""
+Tatoeba-karini      | tatoeba.org from the command line
+---
+
+Run it with the '--help' option for more information.
+"""
 import webbrowser
 import argparse
 import os
@@ -121,7 +127,6 @@ def download_wrapper(download_file):
             res.raise_for_status()
             if not res.ok:
                 print('Download failed.')
-                pass
 
             for block in res.iter_content(1024):
                 the_file.write(block)
