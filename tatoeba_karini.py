@@ -11,88 +11,88 @@ import tarfile
 # --------------------------
 # find and store real path
 
-realPath = os.path.dirname(os.path.realpath(__file__))
+REAL_PATH = os.path.dirname(os.path.realpath(__file__))
 
 # --------------------------
 # Functions for the main LOCAL search
 
 # The main search stuff
 
-sentences = []
-translationsList = []
+SENTENCES = []
+TRANSLATIONS_LIST = []
 
 
-def findTranslation(register, inLanguageS, toLanguageS, termInArgS):
+def find_translation(register, in_language_s, to_language_s, pattern_in_arg_s):
     """
     Make use of the file `links.csv` to check if a sentence has a translation
     in the target language specified by the user.
     """
 
-    with open(realPath + '/links.csv') as links:
-        linksList = csv.reader(links, delimiter='\t')
+    with open(REAL_PATH + '/links.csv') as links:
+        links_list = csv.reader(links, delimiter='\t')
 
-        for line in linksList:
+        for line in links_list:
             if line[0] == register:
-                testCheckID = line[1]
-                checkTranslation(
-                    testCheckID, inLanguageS, toLanguageS, termInArgS)
+                test_check_id = line[1]
+                check_translation(
+                    test_check_id, in_language_s, to_language_s, pattern_in_arg_s)
                 continue
             else:
                 pass
 
 
-def checkTranslation(possibleID, inLanguageS, toLanguageS, termInArgS):
+def check_translation(possible_id, in_language_s, to_language_s, pattern_in_arg_s):
     """
     Check on the file `sentences.csv` if a translation exists. If it does, it
     will be printed, or else, move on to the next iteration.
     """
 
-    with open(realPath + '/sentences.csv') as sentencesListing:
-        sentencesList = csv.reader(sentencesListing, delimiter='\t')
-        for row in sentencesList:
-            if row[0] == possibleID and toLanguageS == row[1]:
-                translationsList.append(row)
-                print(sentences[-1])
-                print(translationsList[-1], '\n\n')
+    with open(REAL_PATH + '/sentences.csv') as sentences_listing:
+        sentences_list = csv.reader(sentences_listing, delimiter='\t')
+        for row in sentences_list:
+            if row[0] == possible_id and to_language_s == row[1]:
+                TRANSLATIONS_LIST.append(row)
+                print(SENTENCES[-1])
+                print(TRANSLATIONS_LIST[-1], '\n\n')
                 continue
             else:
                 pass
 
 
-def findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS):
+def find_translated_pattern(in_language_s, to_language_s, pattern_in_arg_s):
     """
     Takes the user input and checks if there is a sentence containing the
-    searched term in the desired source language.
+    searched pattern in the desired source language.
 
-    If there is, move on and call `findTranslation()` to find possible
+    If there is, move on and call `find_translation()` to find possible
     translations. If not, pass.
     """
 
-    with open(realPath + '/sentences.csv') as sentencesListing:
-        sentencesList = csv.reader(sentencesListing, delimiter='\t')
+    with open(REAL_PATH + '/sentences.csv') as sentences_listing:
+        sentences_list = csv.reader(sentences_listing, delimiter='\t')
 
-        for row in sentencesList:
-            if row[1] == inLanguageS and termInArgS in row[2]:
-                sentences.append(row)
-                findTranslation(row[0], inLanguageS, toLanguageS, termInArgS)
+        for row in sentences_list:
+            if row[1] == in_language_s and pattern_in_arg_s in row[2]:
+                SENTENCES.append(row)
+                find_translation(row[0], in_language_s, to_language_s, pattern_in_arg_s)
 
-            elif row[1] != inLanguageS or termInArgS not in row[2]:
+            elif row[1] != in_language_s or pattern_in_arg_s not in row[2]:
                 pass
 # Define argument function
 
 
-def browserWrapper(fromLanguage, toLanguage, term):
+def browser_wrapper(source_lang, target_lang, pattern):
     """
     Wrapper to the 'browser' functionality.
     Open tatoeba.org in a new tab browser performing a search
     """
 
     # ArgB variables
-    fromReference = '&from='
-    toReference = '&to='
+    from_reference = '&from='
+    to_reference = '&to='
 
     # Join everything to perform the search
-    search = term + fromReference + fromLanguage + toReference + toLanguage
+    search = pattern + from_reference + source_lang + to_reference + target_lang
 
     # Open the browser
     webbrowser.open(
@@ -100,48 +100,48 @@ def browserWrapper(fromLanguage, toLanguage, term):
     )
 
 
-def downloadWrapper(downloadFile):
+def download_wrapper(download_file):
     """
     Wrapper for the download functionality.
     Download and uncompress the files needed by the off line search/find
     functionalities.
     """
 
-    def downloadTool():
+    def download_tool():
         """
         Download the `sentences.csv` file or the `links.csv` file.
         """
 
-        with open(realPath + downloadFile + '.tar.bz2', 'wb') as theFile:
+        with open(REAL_PATH + download_file + '.tar.bz2', 'wb') as the_file:
             print('Downloading the ',
-                  downloadFile, 'file, in the \'.tar.bz2\' format.')
+                  download_file, 'file, in the \'.tar.bz2\' format.')
             print('Please wait.')
             res = requests.get('http://downloads.tatoeba.org/exports/' +
-                               downloadFile + '.tar.bz2')
+                               download_file + '.tar.bz2')
             res.raise_for_status()
             if not res.ok:
                 print('Download failed.')
                 pass
 
             for block in res.iter_content(1024):
-                theFile.write(block)
+                the_file.write(block)
 
             print('Download finished.\n\n')
 
-    def uncompressTool():
+    def uncompress_tool():
         """
         Uncompress the downloaded file.
         """
 
-        print('\n\nUncompressing the', downloadFile, 'file. Please wait.')
-        untarFile = tarfile.open(realPath + downloadFile + '.tar.bz2', 'r:bz2')
-        untarFile.extractall(realPath)
-        untarFile.close()
+        print('\n\nUncompressing the', download_file, 'file. Please wait.')
+        untar_file = tarfile.open(REAL_PATH + download_file + '.tar.bz2', 'r:bz2')
+        untar_file.extractall(REAL_PATH)
+        untar_file.close()
         print('File uncompressed and ready to use.\n')
 
-    if downloadFile == 'sentences' or downloadFile == 'links':
+    if download_file == 'sentences' or download_file == 'links':
         pass
-    elif downloadFile != 'sentences' or downloadFile != 'links':
+    elif download_file != 'sentences' or download_file != 'links':
         print("""
             Wrong file name. Please, choose between 'sentences' and 'links'.
             Consult the README file to learn more about their usage.
@@ -159,11 +159,11 @@ def downloadWrapper(downloadFile):
             \n\nWould you like to proceed? (y/n)')
            """)
 
-    askForDownload = input('> ')
+    ask_for_download = input('> ')
 
-    if askForDownload.lower() == 'yes' or askForDownload.lower() == 'y':
-        downloadTool()
-        uncompressTool()
+    if ask_for_download.lower() == 'yes' or ask_for_download.lower() == 'y':
+        download_tool()
+        uncompress_tool()
 
     else:
         print("""
@@ -174,58 +174,59 @@ def downloadWrapper(downloadFile):
               """)
 
 
-def idWrapper(sentenceId):
+def id_wrapper(sentence_id):
     """
     Open Tatoeba.org in a new tab searching by sentence's ID, just in case.
     Use it to get more information about the sentence.
     """
     webbrowser.open(
-        'https://tatoeba.org/eng/sentences/show/' + sentenceId, new=2
+        'https://tatoeba.org/eng/sentences/show/' + sentence_id, new=2
     )
 
 
-def findWrapper(inLanguageF, termInArgF):
+def find_wrapper(target_lang, pattern):
     """
     Wrapper for the `find` functionality.
     Make use of the 'sentences.csv' file to to find a sentence containing
-    a term in an language.
+    a pattern in an language.
     """
 
-    # findWrapper variables
-    with open(realPath + '/sentences.csv') as listFile:
-        readList = csv.reader(listFile, delimiter='\t')
+    # find_wrapper variables
+    with open(REAL_PATH + '/sentences.csv') as list_file:
+        read_list = csv.reader(list_file, delimiter='\t')
 
-        def findTermInLang():
+        def find_pattern_in_target_lang():
             """
             function responsible for making the search AND looping the matches.
             """
-            foundedTerm = [
+            found_pattern = [
                 row
-                for row in readList
-                if row[1] == inLanguageF and termInArgF in row[2]
+                for row in read_list
+                if row[1] == target_lang and pattern in row[2]
             ]
 
-            for row in foundedTerm:
+            for row in found_pattern:
                 print(row)
 
-        findTermInLang()
+        find_pattern_in_target_lang()
 
 
-def listAbbreviationWrapper(searchPattern):
+
+def list_abbreviation_wrapper(search_pattern):
     """
     Look for the abbreviation of language.
     Necessary for the off line searches.
     The abbreviations follow Tatoeba's pattern.
     """
 
-    with open(realPath + '/abbreviationList.csv') as abbreviationList:
-        abbList = csv.reader(abbreviationList, delimiter='\t')
-        abbreviation = [row for row in abbList if searchPattern in row]
+    with open(REAL_PATH + '/abbreviation_list.csv') as abbreviation_list:
+        abbrev_list = csv.reader(abbreviation_list, delimiter='\t')
+        abbreviation = [row for row in abbrev_list if search_pattern in row]
         print(abbreviation)
 
 
 # Fetching
-def requestGet(search):
+def request_get(search):
     """
     Returns an object of the get method of requests.
     """
@@ -234,32 +235,32 @@ def requestGet(search):
     return res
 
 
-def requestPaginationInput(value):
+def request_pagination_input(value):
     """
     Return whether the user want to see the next page or not.
     """
-    userInput = input(value)
-    if userInput == "y":
-        return userInput
-    elif userInput == "n":
-        return userInput
+    user_input = input(value)
+    if user_input == "y":
+        return user_input
+    elif user_input == "n":
+        return user_input
     else:
         return print('Invalid input.')
 
 
-def requestPagination(search):
+def request_pagination(search):
     """
-    Simulate `requestWrapper()`'s behavior in case the user wants to
+    Simulate `request_wrapper()`'s behavior in case the user wants to
     paginate the results.
     """
-    res = requestGet(search)
-    toPrint = requestPrint(res)
-    return toPrint
+    res = request_get(search)
+    to_print = request_print(res)
+    return to_print
 
 
-def requestPrint(value):
+def request_print(value):
     """
-    Wrapper the 'printing' aspects of `requestWrapper()`.
+    Wrapper the 'printing' aspects of `request_wrapper()`.
     Print sentences and its translations.
     """
 
@@ -278,14 +279,14 @@ def requestPrint(value):
         else:
             print("\n".join("{}".format(el.find(
                 'div', class_='text').get_text()) for el in elements), '\n')
-            paginationHref = pagination.find('a', href=True)
-            return paginationHref.get('href')
+            pagination_href = pagination.find('a', href=True)
+            return pagination_href.get('href')
 
     except AttributeError:
         pass
 
 
-def requestWrapper(fromLanguage, toLanguage, term):
+def request_wrapper(source_lang, target_lang, pattern):
     """
     Wrapper for the 'request' functionality.
     Scrap tatoeba.org.
@@ -293,39 +294,39 @@ def requestWrapper(fromLanguage, toLanguage, term):
     Support basic forward pagination.
     """
 
-    urlBase = 'https://tatoeba.org'
-    searchBase = '/eng/sentences/search?'
-    fromReference = 'from='
-    toReference = '&to='
+    url_base = 'https://tatoeba.org'
+    search_base = '/eng/sentences/search?'
+    from_reference = 'from='
+    to_reference = '&to='
     query = '&query='
 
     # Join everything to perform the search
 
-    search = urlBase + searchBase + fromReference + fromLanguage +\
-        toReference + toLanguage + query + term
-    res = requestGet(search)
+    search = url_base + search_base + from_reference + source_lang +\
+        to_reference + target_lang + query + pattern
+    res = request_get(search)
 
-    pagination = requestPrint(res)
+    pagination = request_print(res)
 
     while pagination is not False:
-        nextPage = requestPaginationInput('Next page? (y/n) ')
-        if nextPage == "n":
+        next_page = request_pagination_input('Next page? (y/n) ')
+        if next_page == "n":
             return print('Ok, no pagination this time...')
-        elif nextPage == "y":
-            search = urlBase + pagination
-            pagination = requestPagination(search)
+        elif next_page == "y":
+            search = url_base + pagination
+            pagination = request_pagination(search)
     else:
         return
 
 
-def searchWrapper(inLanguageS, toLanguageS, termInArgS):
+def translate_wrapper(in_language_s, to_language_s, pattern_in_arg_s):
     """
     Wrapper for the search functionality, which despite
     of its complexity, is implemented with the use of the
     'find' functionality.
     """
 
-    findTermTranslatedtoLang(inLanguageS, toLanguageS, termInArgS)
+    find_translated_pattern(in_language_s, to_language_s, pattern_in_arg_s)
 
 # --------------------------
 # Define command line menu function
@@ -349,9 +350,9 @@ def parse_arguments():
             characters abbreviation of the source language")
     browser_parser.add_argument("target_language", type=str, help="A three \
             characters abbreviation of the target language")
-    browser_parser.add_argument("term", type=str, help="The term \
+    browser_parser.add_argument("pattern", type=str, help="The pattern \
             to be searched")
-    browser_parser.set_defaults(func=browserWrapper)
+    browser_parser.set_defaults(func=browser_wrapper)
 
     download_parser = subparsers.add_parser("download", help="Download \
             files from Tatoeba.org in order to perform off line searches. \
@@ -360,29 +361,29 @@ def parse_arguments():
 
     download_parser.add_argument("file", type=str, help="The file \
             to be downloaded")
-    download_parser.set_defaults(func=downloadWrapper)
+    download_parser.set_defaults(func=download_wrapper)
 
     find_parser = subparsers.add_parser("find", aliases=["f"], help="Find \
-            sentences containing a term in a specific language. Requires the \
+            sentences containing a pattern in a specific language. Requires the \
             'sentences.csv' file (reference to the 'download' command). Usage:\
             tatoeba-karini find [target_language] [term]")
     find_parser.add_argument("target_language", type=str, help="A three \
             characters abbreviation of the target language")
-    find_parser.add_argument("term", type=str, help="The term to be searched")
-    find_parser.set_defaults(func=findWrapper)
+    find_parser.add_argument("pattern", type=str, help="The pattern to be searched")
+    find_parser.set_defaults(func=find_wrapper)
 
     id_parser = subparsers.add_parser("id", help="Open Tatoeba on the \
             browser searching by sentence's ID. Usage: \
             tatoeba-karini id [target_id]")
     id_parser.add_argument("target_id", type=int, help="The target ID")
-    id_parser.set_defaults(func=idWrapper)
+    id_parser.set_defaults(func=id_wrapper)
 
     list_languages_parser = subparsers.add_parser("list-languages", help="List \
             languages and their abbreviation used by Tatoeba. Usage: \
             tatoeba-karini list-languages [target_language]")
     list_languages_parser.add_argument("target_language", type=str, help="The \
             abbreviation of the target language name")
-    list_languages_parser.set_defaults(func=listAbbreviationWrapper)
+    list_languages_parser.set_defaults(func=list_abbreviation_wrapper)
 
     scrap_parser = subparsers.add_parser("scrap", aliases=["s"], help="Scrap \
             data from Tatoeba.org performing a search. \
@@ -392,12 +393,12 @@ def parse_arguments():
             characters abbreviation of the source language")
     scrap_parser.add_argument("target_language", type=str, help="A three \
             characters abbreviation of the target language")
-    scrap_parser.add_argument("term", type=str, help="The term \
+    scrap_parser.add_argument("pattern", type=str, help="The pattern \
             to be searched")
-    scrap_parser.set_defaults(func=requestWrapper)
+    scrap_parser.set_defaults(func=request_wrapper)
 
     translate_parser = subparsers.add_parser("translate", aliases=["t"], help="Search \
-            for sentences containing term in a specific language and the \
+            for sentences containing pattern in a specific language and the \
             translations of the sentence in another language. The local \
             version of the standard search performed on tatoeba.org. \
             Usage: tatoeba-karini translate [source_language] \
@@ -406,9 +407,9 @@ def parse_arguments():
             characters abbreviation of the source language")
     translate_parser.add_argument("target_language", type=str, help="A three \
             characters abbreviation of the target language")
-    translate_parser.add_argument("term", type=str, help="The term \
+    translate_parser.add_argument("pattern", type=str, help="The pattern \
             to be searched")
-    translate_parser.set_defaults(func=searchWrapper)
+    translate_parser.set_defaults(func=translate_wrapper)
 
     return vars(parser.parse_args())
 
@@ -420,51 +421,51 @@ def main():
     Call the wrapper function accordingly to the argument passed by the user.
     """
 
-    argsDict = parse_arguments()
+    args_dict = parse_arguments()
 
-    if re.search("browserWrapper", str(argsDict["func"])):
-        fromLanguage = str(argsDict["source_language"])
-        toLanguage = str(argsDict["target_language"])
-        term = str(argsDict["term"])
+    if re.search("browser_wrapper", str(args_dict["func"])):
+        source_lang = str(args_dict["source_language"])
+        target_lang = str(args_dict["target_language"])
+        pattern = str(args_dict["pattern"])
 
-        browserWrapper(fromLanguage, toLanguage, term)
+        browser_wrapper(source_lang, target_lang, pattern)
 
-    elif re.search("findWrapper", str(argsDict["func"])):
-        inLanguageF = str(argsDict["target_language"])
-        termInArgF = str(argsDict["term"])
+    elif re.search("find_wrapper", str(args_dict["func"])):
+        target_lang = str(args_dict["target_language"])
+        pattern = str(args_dict["pattern"])
 
-        findWrapper(inLanguageF, termInArgF)
+        find_wrapper(target_lang, pattern)
 
-    elif re.search("downloadWrapper", str(argsDict["func"])):
-        downloadFile = str(argsDict["file"])
+    elif re.search("download_wrapper", str(args_dict["func"])):
+        download_file = str(args_dict["file"])
 
-        downloadWrapper(downloadFile)
+        download_wrapper(download_file)
 
-    elif re.search("idWrapper", str(argsDict["func"])):
-        sentenceId = str(argsDict["target_id"])
+    elif re.search("id_wrapper", str(args_dict["func"])):
+        sentence_id = str(args_dict["target_id"])
 
-        idWrapper(sentenceId)
+        id_wrapper(sentence_id)
 
-    elif re.search("listAbbreviationWrapper", str(argsDict["func"])):
-        searchPattern = str(argsDict["target_language"])
+    elif re.search("list_abbreviation_wrapper", str(args_dict["func"])):
+        search_pattern = str(args_dict["target_language"])
 
-        listAbbreviationWrapper(searchPattern)
+        list_abbreviation_wrapper(search_pattern)
 
-    elif re.search("requestWrapper", str(argsDict["func"])):
-        fromLanguage = str(argsDict["source_language"])
-        toLanguage = str(argsDict["target_language"])
-        term = str(argsDict["term"])
+    elif re.search("request_wrapper", str(args_dict["func"])):
+        source_lang = str(args_dict["source_language"])
+        target_lang = str(args_dict["target_language"])
+        pattern = str(args_dict["pattern"])
 
-        requestWrapper(fromLanguage, toLanguage, term)
+        request_wrapper(source_lang, target_lang, pattern)
 
-    elif re.search("searchWrapper", str(argsDict["func"])):
-        fromLanguage = str(argsDict["source_language"])
-        toLanguage = str(argsDict["target_language"])
-        term = str(argsDict["term"])
-        searchWrapper(fromLanguage, toLanguage, term)
+    elif re.search("translate_wrapper", str(args_dict["func"])):
+        source_lang = str(args_dict["source_language"])
+        target_lang = str(args_dict["target_language"])
+        pattern = str(args_dict["pattern"])
+        translate_wrapper(source_lang, target_lang, pattern)
 
-    elif re.search("version", str(argsDict["func"])):
-        print(argsDict)
+    elif re.search("version", str(args_dict["func"])):
+        print(args_dict)
 
     else:
         print("Ooops!")
