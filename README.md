@@ -124,12 +124,13 @@ About the commands and their current state:
   
 ## License
 
-All the creative content is licensed by [Tatoeba.org](https://tatoeba.org) under CC-BY 2.0.
+All the creative content is licensed by [Tatoeba.org](https://tatoeba.org) under
+CC-BY 2.0. For more information on the Tatoeba project, please head to
+tatoeba.org .
 
-Tatoeba-karini is a _personal_ project, which aims to provide a faster way to
-check the amazing resource of Tatoeba.org from the command line. I'm working on
-it **as** and **while** learning to program independently. By no means it should
-be used for something serious.
+Tatoeba-karini is released under [GNU
+AGPLv3](https://choosealicense.com/licenses/agpl-3.0/#). A copy of the license
+is available [here](LICENSE.txt).
 
 ## Issues, bugs, contributions
 
