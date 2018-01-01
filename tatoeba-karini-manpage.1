@@ -1,0 +1,105 @@
+.TH TATOEBA-KARINI 1
+.SH NAME
+tatoeba-karini \- tatoeba.org from the command line. v0.0.5+
+.SH SYNOPSIS
+.BR tatoeba-karini 
+.I [COMMAND] [ARGUMENT]
+.LP
+.BR tatoeba-karini
+.R browser
+.I [SOURCE-LANGUAGE] [TARGET-LANGUAGE] [PATTERN]
+.RS
+Open the browser searching for translations of sentences from
+[SOURCE-LANGUAGE] to [TARGET-LANGUAGE] containing [PATTERN]
+.RE
+.LP
+.BR tatoeba-karini
+.R find
+.I [TARGET-LANGUAGE] [PATTERN]
+.RS
+Locally, find all sentences in the given [TARGET-LANGUAGE] containing [PATTERN]
+.RE
+.LP
+.BR tatoeba-karini
+.R list-languages
+.I [LANGUAGE]
+.RS
+Returns a list containing the abbreviation of the given [LANGUAGE]
+.RE
+.LP
+.BR tatoeba-karini
+.R scrap
+.I [SOURCE-LANGUAGE] [TARGET-LANGUAGE] [PATTERN]
+.RS
+Scrap tatoeba.org searching for translations of sentences from
+[SOURCE-LANGUAGE] to [TARGET-LANGUAGE] containing [PATTERN]
+.RE
+.LP
+.BR tatoeba-karini
+.R translate
+.I [SOURCE-LANGUAGE] [TARGET-LANGUAGE] [PATTERN]
+.RS
+Locally look for translations of sentences from
+[SOURCE-LANGUAGE] to [TARGET-LANGUAGE] containing [PATTERN]
+.RE
+.LP
+.BR tatoeba-karini
+.R id
+.I [ID-NUMBER]
+.RS
+Open the browser searching for the (sentence's) [ID-NUMBER] on tatoeba.org
+.RE
+.LP
+.BR tatoeba-karini
+.R download
+.I [FILE-NAME]
+.RS
+Download the given [FILE-NAME] from <https://tatoeba.org/eng/downloads>.
+[FILE-NAME] can be either 'sentences' or 'links'.
+.RE
+.SH DESCRIPTION
+Tatoeba-karini provides access to the data of tatoeba.org from the command
+line. 
+.LP
+The
+.BR find
+command and the
+.BR translate
+command make use of local files that are not shipped with Tatoeba-karini.
+The files are
+.I sentences.csv
+and
+.I links.csv
+, you can download the files manually at
+.I <https://tatoeba.org/eng/downloads>
+or use the
+.RB download
+command.
+.SH OPTIONS
+.BR --help, 
+.BR \-h
+.LP
+.BR --version,
+.BR \-v
+.SH SEE ALSO
+.BR python(1)
+.SH BUGS
+.BI find
+and
+.BI translate
+are extremely slow.
+Not all errors are handled. There is no test coverage.
+.LP
+.SH COPYRIGHT
+All the creative content is licensed by 
+.BR Tatoeba.org 
+under CC-BY 2.0. For more information on the 
+.BR Tatoeba 
+.BR project
+, please head to
+.BR <https://tatoeba.org>.
+.LP
+.BR Tatoeba-karini
+is released under GNU AGPLv3: <https://github.com/lsrdg/tatoeba-karini/blob/master/LICENSE.txt>.
+.SH AUTHOR
+can be found at <https://github.com/lsrdg/tatoeba-karini>.
