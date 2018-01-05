@@ -1,5 +1,8 @@
 ## Contributing to Tatoeba Karini
 
+For more up-to-date information, please refer to the
+[wiki](https://github.com/lsrdg/tatoeba-karini/wiki/Contributing)
+
 ### As a user
 
 If you want to help but don't know where start, just let your feedback.
@@ -24,3 +27,5 @@ questions, critiques etc.
 
 You might want to take a look at the
 [milestones](https://github.com/lsrdg/tatoeba-karini/milestones) of the project.
+
+Just assign to yourself an issue, or create one in case it doesn't exist. o/
