@@ -2,6 +2,10 @@
 
 [![Build
 Status](https://travis-ci.org/lsrdg/tatoeba-karini.svg?branch=master)](https://travis-ci.org/lsrdg/tatoeba-karini)
+[![Version
+Status](https://img.shields.io/badge/version-v0.0.6-blue.svg)](https://github.com/lsrdg/tatoeba-karini/releases/tag/v0.0.6)
+[![Wiki
+Status](https://img.shields.io/badge/wiki-active-orange.svg)](https://github.com/lsrdg/tatoeba-karini/wiki)
 
 tatoeba.org from the command line.
 
@@ -11,7 +15,7 @@ commands to help on the general usage of the script (e.g. downloading and uncomp
 needed files).
 
 The project is currently on
-**[v0.0.5](https://github.com/lsrdg/tatoeba-karini/releases/tag/v0.0.5)**.
+**[v0.0.6](https://github.com/lsrdg/tatoeba-karini/releases/tag/v0.0.6)**.
 
 WARNING: this project is **extremely experimental**. Come together! (:
 
@@ -26,6 +30,10 @@ WARNING: this project is **extremely experimental**. Come together! (:
 > from one language to another.
 
 _from [Wikipedia](https://en.wikipedia.org/wiki/Tatoeba)_ 
+
+
+For more information (than this README can provide) please take a look at the
+**[wiki](https://github.com/lsrdg/tatoeba-karini/wiki)**.
 
 
 ## Why?/Motivation
@@ -151,14 +159,3 @@ https://gitlab.com/lsrdg/tatoeba-karini
 The repository on Gitlab is to anyone who doesn't want to bother
 with Github to have an alternative to report issue. Keep mind that (at least for
 now) everything will be redirected to Github.
-
-## Thank you!
-
-Special thanks to the team of Tatoeba.org for keeping this amazing project
-alive!
-
-Another special thanks goes to @Spindel for the guidance and great suggestions.
-
-In a matter of fact, thanks to those who cared to open an issue, star and/or
-fork.
-That's great to be aware of other people looking for this kind of stuff. (:
