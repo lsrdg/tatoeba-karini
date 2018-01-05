@@ -344,7 +344,7 @@ def parse_arguments():
 
     parser = argparse.ArgumentParser("tatoeba-karini [COMMAND] [ARGUMENT(S)]")
 
-    parser.add_argument("--version", "-v", action="version", version="v0.0.5+")
+    parser.add_argument("--version", "-v", action="version", version="v0.0.6")
 
     subparsers = parser.add_subparsers(help="Types of commands")
 
