@@ -103,7 +103,7 @@ The script can perform different actions, such as:
 |------------------|-------------------------------------------------------------------------------------------------------------------------|--------------------|------------------------------------------|
 | `browser` (or `b`)               | Open the browser in a new tab performing a search on tatoeba.org                                                        | 3 | `$ tatoeba-karini -b eng jpn breath`     | 
 | `find` (or `f`)               | Find sentences in X language containing the Y-term                                                                      | 2 |  `$ tatoeba-karini find yor water`          |
-| `list-languages`               | List languages and their abbreviation used by Tatoeba                                                                   | 1 |  `$ tatoeba-karini list-languages Japanese`           |
+| `abbreviate`               | List languages and their abbreviation used by Tatoeba                                                                   | 1 |  `$ tatoeba-karini abbreviate Japanese`           |
 | `scrap` (or `s`               | Scrap Tatoeba.org. Works in the same way as the main search on the website                                       | 3 |  `$ tatoeba-karini scrap eng ara watermelon` |
 | `translate` (or `t`)               | Search for sentences containing term in a specific language and the translation of the sentences in another language | 3 | `$ tatoeba-karini translate eng jpn air`        |
 | `id`               | Open Tatoeba on the browser searching by sentence's ID | 1                  | `$ tatoeba-karini id 825762`             |
