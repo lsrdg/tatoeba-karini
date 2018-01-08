@@ -225,8 +225,12 @@ def list_abbreviation_wrapper(search_pattern):
     """
 
     with open(REAL_PATH + '/abbreviation_list.csv') as abbreviation_list:
+        search_pattern = search_pattern.lower()
         abbrev_list = csv.reader(abbreviation_list, delimiter='\t')
-        abbreviation = [row for row in abbrev_list if search_pattern in row]
+        abbreviation = [
+            row for row in abbrev_list if search_pattern in map(
+                str.lower, row)
+            ]
         print(abbreviation)
 
 
