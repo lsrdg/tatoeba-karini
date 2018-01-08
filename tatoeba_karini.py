@@ -231,7 +231,11 @@ def list_abbreviation_wrapper(search_pattern):
             row for row in abbrev_list if search_pattern in map(
                 str.lower, row)
             ]
-        print(abbreviation)
+
+        if not abbreviation:
+            print("Pattern not found. Please, check your spelling.")
+        else:
+            print(abbreviation)
 
 
 # Fetching
