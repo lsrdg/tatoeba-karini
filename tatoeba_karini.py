@@ -344,7 +344,7 @@ def parse_arguments():
 
     parser = argparse.ArgumentParser("tatoeba-karini [COMMAND] [ARGUMENT(S)]")
 
-    parser.add_argument("--version", "-v", action="version", version="v0.0.6")
+    parser.add_argument("--version", "-v", action="version", version="v0.0.6+")
 
     subparsers = parser.add_subparsers(help="Types of commands")
 
@@ -383,12 +383,12 @@ def parse_arguments():
     id_parser.add_argument("target_id", type=int, help="The target ID")
     id_parser.set_defaults(func=id_wrapper)
 
-    list_languages_parser = subparsers.add_parser("list-languages", help="List \
-            languages and their abbreviation used by Tatoeba. Usage: \
-            tatoeba-karini list-languages [target_language]")
-    list_languages_parser.add_argument("target_language", type=str, help="The \
+    abbreviate_parser = subparsers.add_parser("abbreviate", aliases=["ab"], \
+            help="List languages and their abbreviation used by Tatoeba. \
+            Usage: tatoeba-karini abbreviate [target_language]")
+    abbreviate_parser.add_argument("target_language", type=str, help="The \
             abbreviation of the target language name")
-    list_languages_parser.set_defaults(func=list_abbreviation_wrapper)
+    abbreviate_parser.set_defaults(func=list_abbreviation_wrapper)
 
     scrap_parser = subparsers.add_parser("scrap", aliases=["s"], help="Scrap \
             data from Tatoeba.org performing a search. \
