@@ -231,7 +231,22 @@ def list_abbreviation_wrapper(search_pattern):
             row for row in abbrev_list if search_pattern in map(
                 str.lower, row)
             ]
-        print(abbreviation)
+
+        try:
+            print(abbreviation[0])
+
+        except IndexError:
+            print("""
+            Pattern not found! Possible solutions:
+
+            1 - Please, check your spelling and try again
+            2 - Go to tatoeba.org and check if the language is supported
+                  If the language is supported by tatoeba.org but not here, please
+                  open an issue at https://github.com/lsrdg/tatoeba-karini/wiki
+            3 - Tatoeba-karini is shipped with the file abbreviation_list.csv which
+                can be checked manually
+    
+            """)
 
 
 # Fetching
